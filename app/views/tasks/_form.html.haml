@@ -1,10 +1,9 @@
-= simple_form_for(@task) do |f|
+= simple_form_for(@task, :html => { :class => 'form-horizontal' }) do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :name
-    = f.input :deadline
-    = f.input :done
+    = f.input :deadline, as: :string, :input_html => { :class => 'datepicker' }
 
   .form-actions
     = f.button :submit

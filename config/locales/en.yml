@@ -3,3 +3,14 @@
 
 en:
   hello: "Hello world"
+  quipper_todo: "Quipper TODO"
+  quipper_explanation: |
+    Et nisi tortor non amet in! Nec parturient, penatibus augue? Quis. In, cras sed nec, arcu placerat cum cursus ut
+    ultricies nunc amet ridiculus porttitor lorem, montes ridiculus elit in turpis purus, nascetur ridiculus auctor enim!
+    Amet adipiscing dignissim odio, natoque mauris tempor adipiscing amet adipiscing. Est a? Augue odio non turpis lectus
+    pellentesque porttitor? Amet, tincidunt? Nunc mauris lundium dolor purus aenean et, augue, sed elit eu. Nisi mauris,
+    sed! Sagittis. Augue ultricies urna, odio! Et, adipiscing. Nunc risus, magnis elementum! Turpis cras, dolor facilisis
+    integer adipiscing ut! Ultricies. Sed sociis. Sociis, nec sociis parturient, purus, arcu turpis? Dictumst, porta
+    parturient! Integer nec a turpis ac non? Egestas dapibus, lorem ut. Aliquet integer massa! Auctor rhoncus a mauris
+    placerat.
+  new_task: "New Task"

@@ -12,10 +12,10 @@
       %nav.navbar-inner
         .container
           = render 'layouts/navigation'
-    #main{:role => "main"}
-      .container
-        .content
-          .row
-            .span12
-              = yield
-    %footer
+    #main.container
+      .row
+        .span9
+          = yield
+        .span3
+          %h2= t(:quipper_todo)
+          %p= t(:quipper_explanation)
