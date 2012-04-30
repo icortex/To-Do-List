@@ -14,6 +14,8 @@ group :development, :test do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'spork-rails'
+  gem 'shoulda-matchers'
+  gem "awesome_print"
 end
 
 gem "haml-rails", ">= 0.3.4", :group => :development
