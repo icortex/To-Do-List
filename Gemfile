@@ -8,8 +8,17 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'database_cleaner'
+  gem 'spork-rails'
+end
+
+gem "haml-rails", ">= 0.3.4", :group => :development
+
 gem 'jquery-rails'
-gem "therubyracer"
 gem "haml", ">= 3.1.4"
 gem "bootstrap-sass", ">= 2.0.1"
 gem "will_paginate", ">= 3.0.3"
