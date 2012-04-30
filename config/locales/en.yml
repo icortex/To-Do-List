@@ -14,3 +14,10 @@ en:
     parturient! Integer nec a turpis ac non? Egestas dapibus, lorem ut. Aliquet integer massa! Auctor rhoncus a mauris
     placerat.
   new_task: "New Task"
+  delete: "Delete"
+  edit: "Edit"
+  task: "Task"
+  deadline: "Deadline"
+  created_at: "Created at"
+  action: "Action"
+  mark_done: "Done?"

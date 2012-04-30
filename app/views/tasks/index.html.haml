@@ -1,23 +1,23 @@
-%h1 Listing tasks
-
-%table
+%h1 All tasks
+= link_to 'New Task', new_task_path
+%table.table.table-striped
   %tr
-    %th Name
-    %th Deadline
-    %th Done
-    %th
-    %th
-    %th
+    %th=t(:mark_done)
+    %th=t(:task)
+    %th= t(:deadline)
+    %th= t(:created_at)
+    %th= t(:action)
 
   - @tasks.each do |task|
     %tr
+      %td= task.done
       %td= task.name
       %td= task.deadline
-      %td= task.done
-      %td= link_to 'Show', task
-      %td= link_to 'Edit', edit_task_path(task)
-      %td= link_to 'Destroy', task, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Task', new_task_path
+      %td= task.created_at
+      %td
+        = link_to edit_task_path(task), class: 'btn btn-primary btn-mini' do
+          %i.icon-edit.icon-white
+          = t(:edit)
+        = link_to task, :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger btn-mini' do
+          %i.icon-trash.icon-white
+          = t(:delete)
