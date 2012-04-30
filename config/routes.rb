@@ -1,3 +1,5 @@
 Quipper::Application.routes.draw do
-  root :to => "home#index"
+  resources :tasks
+
+  root :to => "tasks#index"
 end
