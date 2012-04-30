@@ -26,7 +26,7 @@ Spork.prefork do
     # config.mock_with :rr
 
     config.before(:suite) do
-      DatabaseCleaner.strategy = :truncation, {:except => static_info_tables}
+      DatabaseCleaner.strategy = :truncation
     end
 
     config.before(:each) do
