@@ -1,11 +1,19 @@
-nav {
+body {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #E3E3E3), color-stop(100%, #C1E1E8));
+  background-image: -webkit-linear-gradient(#E3E3E3 0%, #C1E1E8);
+  background-image: -moz-linear-gradient(#E3E3E3 0%, #C1E1E8);
+  background-image: -o-linear-gradient(#E3E3E3 0%, #C1E1E8);
+  background-image: -ms-linear-gradient(#E3E3E3 0%, #C1E1E8);
+  background-image: linear-gradient(#E3E3E3 0%,#C1E1E8);
+}
+
+nav ul.primary_nav{
+  background-image: -webkit-linear-gradient(#FEFEFE, #E8E8E8);
+  background-image: -moz-linear-gradient(#FEFEFE, #E8E8E8);
+  background-image: -o-linear-gradient(#FEFEFE, #E8E8E8);
+  background-image: -ms-linear-gradient(#FEFEFE, #E8E8E8);
+  background-image: linear-gradient(#FEFEFE,#E8E8E8);
   background-color:#fefefe;
-  clear:both;
-  margin-left:1.639%;
-  margin-right:1.639%;
-  width:960px;
-  min-width:960px;
-  overflow:hidden;
   -moz-border-radius:2.5em;
   -webkit-border-radius:2.5em;
   -o-border-radius:2.5em;
@@ -15,20 +23,13 @@ nav {
   -moz-box-shadow:rgba(140,137,137,0.8) 1px 1px 3px;
   -webkit-box-shadow:rgba(140,137,137,0.8) 1px 1px 3px;
   -o-box-shadow:rgba(140,137,137,0.8) 1px 1px 3px;
-  box-shadow:rgba(140,137,137,0.8) 1px 1px 3px
-}
-
-.cssgradients nav {
-  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fefefe), color-stop(100%, #e8e8e8));
-  background-image:-webkit-linear-gradient(#fefefe, #e8e8e8);
-  background-image:-moz-linear-gradient(#fefefe, #e8e8e8);
-  background-image:-o-linear-gradient(#fefefe, #e8e8e8);
-  background-image:-ms-linear-gradient(#fefefe, #e8e8e8);
-  background-image:linear-gradient(#fefefe,#e8e8e8)
+  box-shadow:rgba(140,137,137,0.8) 1px 1px 3px;
+  clear:both;
+  overflow:hidden;
 }
 
 nav ul.primary_nav {
-  margin:0;
+  margin: 20px 0;
   padding:0;
   border:0;
   list-style:none;
@@ -39,21 +40,32 @@ nav ul.primary_nav {
 nav ul.primary_nav li {
   list-style-image:none;
   list-style-type:none;
-  margin-left:0px
+  margin-left:0px;
+  display:inline;
+  float:left;
+  border-right: 1px solid #e3e3e3;
 }
 
-nav ul.primary_nav li {
-  display:inline;
-  float:left
+nav ul.primary_nav li:last-child {
+  border: none;
 }
 
 nav ul.primary_nav li a {
   display:inline;
-  float:left
+  float:left;
+  text-transform:uppercase;
+  padding:0 1.5em;
+  line-height:3.6em;
+  color:#524f4f;
+  text-decoration:none;
+  text-align:center;
+  width: 120px;
+
 }
 
-nav ul.primary_nav li {
-  border-right:1px solid #e3e3e3
+nav ul.primary_nav li a:hover {
+  color:#fff;
+  background-color:#66c6d7;
 }
 
 nav ul.primary_nav li:first-child a {
@@ -72,18 +84,18 @@ nav ul.primary_nav li:first-child a {
   border-bottom-left-radius:2.5em
 }
 
-nav ul.primary_nav li a {
-  text-transform:uppercase;
-  font-size:0.7em;
-  padding:0 1.5em;
-  line-height:3.6em;
-  color:#524f4f;
-  text-decoration:none;
-  width:120px;
-  text-align:center
-}
-
-nav ul.primary_nav li a:hover {
-  color:#fff;
-  background-color:#66c6d7
+nav ul.primary_nav li:last-child a {
+  padding-right:2.7em;
+  -moz-border-radius-topright:2.5em;
+  -webkit-border-top-right-radius:2.5em;
+  -o-border-top-right-radius:2.5em;
+  -ms-border-top-right-radius:2.5em;
+  -khtml-border-top-right-radius:2.5em;
+  border-top-right-radius:2.5em;
+  -moz-border-radius-bottomright:2.5em;
+  -webkit-border-bottom-right-radius:2.5em;
+  -o-border-bottom-right-radius:2.5em;
+  -ms-border-bottom-right-radius:2.5em;
+  -khtml-border-bottom-right-radius:2.5em;
+  border-bottom-right-radius:2.5em
 }

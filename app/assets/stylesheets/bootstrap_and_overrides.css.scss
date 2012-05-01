@@ -1,3 +1,25 @@
+$bodyBackground: #E2E3E3;
+$navbarBackground: #E2E3E3;
+$navbarBackgroundHighlight: #E2E3E3;
+$navbarHeight: 150px;
+$tableBorder: #CBCACA;
+$tableBackground: #F1F1F1;
+$tableBackgroundHover: #FEFEFE;
+$headingsColor: #46A8B9;
+
 @import "bootstrap";
-body { padding-top: 60px; }
+
+header {
+  margin-top: 20px;
+}
+
 @import "bootstrap-responsive";
+
+/*#E2E3E3 Gray*/
+/*blue #C2E1E8
+dark gray #525252
+*/
+
+.table th, .table td {
+  text-align: center;
+}

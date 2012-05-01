@@ -8,10 +8,8 @@
     = csrf_meta_tags
     = yield(:head)
   %body
-    %header.navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          = link_to image_tag('quipper_logo.png', alt: 'Quipper'), root_path
+    %header.container
+      = link_to image_tag('quipper_logo.png', alt: 'Quipper'), root_path
     %nav
     = render 'layouts/navigation'
     #main.container
