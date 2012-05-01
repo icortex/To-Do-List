@@ -6,6 +6,7 @@ $tableBorder: #CBCACA;
 $tableBackground: #F1F1F1;
 $tableBackgroundHover: #FEFEFE;
 $headingsColor: #46A8B9;
+$formActionsBackground: none;
 
 @import "bootstrap";
 
@@ -13,12 +14,11 @@ header {
   margin-top: 20px;
 }
 
-@import "bootstrap-responsive";
+.form-actions {
+  background: none;
+}
 
-/*#E2E3E3 Gray*/
-/*blue #C2E1E8
-dark gray #525252
-*/
+@import "bootstrap-responsive";
 
 .table th, .table td {
   text-align: center;

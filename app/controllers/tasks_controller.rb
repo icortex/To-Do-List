@@ -2,6 +2,7 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.all
+    @task = Task.new
   end
 
   def new
@@ -14,13 +15,14 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(params[:task])
+    @tasks = Task.all
 
     respond_to do |format|
       if @task.save
         format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
         format.json { render json: @task, status: :created, location: @task }
       else
-        format.html { render action: "new" }
+        format.html { render action: "index" }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end

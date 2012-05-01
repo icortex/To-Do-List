@@ -1,5 +1,11 @@
-%h1= t(:all_tasks)
-= link_to t(:new_task), new_task_path
+#new_task.collapse
+  = render 'new'
+.heading
+  %h1.floating= t(:all_tasks)
+  = link_to '#', onClick: 'return false', id: 'new-task-link', 'data-toggle' => "collapse",
+    'data-target'=>"#new_task", class: 'btn btn-success' do
+    %i.icon-pencil.icon-white
+    = t(:new_task)
 %table.table
   %tr
     %th=t(:mark_done)
@@ -12,8 +18,8 @@
     %tr
       %td= task.done
       %td= task.name
-      %td= task.deadline
-      %td= task.created_at
+      %td= task.deadline.strftime('%d %B %Y')
+      %td= task.created_at.strftime('%d %B %Y')
       %td
         = link_to edit_task_path(task), class: 'btn btn-primary btn-mini' do
           %i.icon-edit.icon-white

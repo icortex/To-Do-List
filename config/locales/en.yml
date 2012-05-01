@@ -25,4 +25,5 @@ en:
   all: "All"
   pending: "Pending"
   done: "Done"
-  fail: "Fail"
+  fail: "Expired"
+  cancel: "Cancel"

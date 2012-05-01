@@ -4,4 +4,5 @@
     = f.input :name
     = f.input :deadline, as: :string, :input_html => { :class => 'datepicker' }
   .form-actions
-    = f.button :submit
+    = f.button :submit, class: 'btn btn-primary'
+    = link_to t(:cancel), '#', onClick: 'return false', class: 'btn', 'data-toggle' => "collapse", 'data-target'=>"#new_task"
