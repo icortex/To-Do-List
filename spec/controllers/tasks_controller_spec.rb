@@ -18,7 +18,7 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe TasksController do
+describe TasksController, :clean_db do
 
   # This should return the minimal set of attributes required to create a valid
   # Task. As you add validations to Task, be sure to

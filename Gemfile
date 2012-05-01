@@ -11,11 +11,13 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'launchy'
   gem 'database_cleaner'
   gem 'spork-rails'
   gem 'shoulda-matchers'
-  gem "awesome_print"
+  gem 'awesome_print'
+  gem 'factory_girl_rails'
 end
 
 gem "haml-rails", ">= 0.3.4", :group => :development

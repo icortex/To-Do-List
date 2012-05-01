@@ -8,13 +8,17 @@ Spork.prefork do
   # This file is copied to spec/ when you run 'rails generate rspec:install'
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
-  require 'rspec/rails'
   require 'rspec/autorun'
+  require 'rspec/rails'
   require 'capybara/rspec'
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
+  # Capybara
+  Capybara.default_host = "http://127.0.0.1"
+  Capybara.javascript_driver = :webkit
 
   RSpec.configure do |config|
     # ## Mock Framework
@@ -24,6 +28,9 @@ Spork.prefork do
     # config.mock_with :mocha
     # config.mock_with :flexmock
     # config.mock_with :rr
+    # config.mock_with :rr
+
+    config.mock_with :rspec
 
     config.treat_symbols_as_metadata_keys_with_true_values = true
     config.filter_run :focus => true
@@ -31,13 +38,37 @@ Spork.prefork do
 
     config.before(:suite) do
       DatabaseCleaner.strategy = :truncation
+      DatabaseCleaner.start
+      DatabaseCleaner.clean
     end
 
     config.before(:each) do
-      DatabaseCleaner.start
+      #DatabaseCleaner.start
     end
 
     config.after(:each) do
+      # Clean the database
+      #DatabaseCleaner.clean
+      # Clear deliveries so that indexes match for isolated examples
+      #ActionMailer::Base.deliveries.clear
+    end
+
+    # Clean db in before hook, better if stopped examples at the middle of execution
+    config.before(:each, :clean_db => true) do |example|
+      DatabaseCleaner.start
+      DatabaseCleaner.clean
+    end
+    config.after(:each, :clean_db => true) do |example|
+      # Clean the database
+      puts '-database cleaned-'
+    end
+    # clean
+    config.before(:each, :clean_mail => true) do |example|
+      # Clear deliveries so that indexes match for isolated examples
+      ActionMailer::Base.deliveries.clear
+    end
+
+    config.after(:suite) do
       # Clean the database
       DatabaseCleaner.clean
       # Clear deliveries so that indexes match for isolated examples
@@ -45,7 +76,7 @@ Spork.prefork do
     end
 
     # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-    config.fixture_path = "#{::Rails.root}/spec/fixtures"
+    #config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
     # examples within a transaction, remove the following line or assign false
