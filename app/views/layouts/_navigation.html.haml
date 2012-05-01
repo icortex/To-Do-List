@@ -1,1 +1,8 @@
-= link_to "Quipper", root_path, :class => 'brand'
+%nav.container
+  .row
+    .span9
+      %ul.primary_nav
+        %li= link_to t(:all), '#'
+        %li= link_to t(:pending), '#'
+        %li= link_to t(:done), '#'
+        %li= link_to t(:fail), '#'

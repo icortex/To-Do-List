@@ -9,9 +9,11 @@
     = yield(:head)
   %body
     %header.navbar.navbar-fixed-top
-      %nav.navbar-inner
+      .navbar-inner
         .container
-          = render 'layouts/navigation'
+          = link_to image_tag('quipper_logo.png', alt: 'Quipper'), root_path
+    %nav
+    = render 'layouts/navigation'
     #main.container
       .row
         .span9

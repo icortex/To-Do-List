@@ -21,3 +21,8 @@ en:
   created_at: "Created at"
   action: "Action"
   mark_done: "Done?"
+  all_tasks: "All tasks"
+  all: "All"
+  pending: "Pending"
+  done: "Done"
+  fail: "Fail"
