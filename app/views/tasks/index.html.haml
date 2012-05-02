@@ -1,7 +1,7 @@
 #new_task_container.collapse
   = render 'new'
 .heading
-  %h1.floating= t(:all_tasks)
+  %h1.floating= t(@title)
   = link_to '#', onClick: 'return false', id: 'new-task-link', 'data-toggle' => "collapse",
     'data-target'=>"#new_task_container", class: 'btn btn-success' do
     %i.icon-pencil.icon-white
