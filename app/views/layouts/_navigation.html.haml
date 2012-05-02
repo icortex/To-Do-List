@@ -4,6 +4,6 @@
       %nav
         %ul.primary_nav
           %li= link_to t(:all), tasks_path
-          %li= link_to t(:pending), tasks_path(status: :pending)
-          %li= link_to t(:done), tasks_path(status: :done)
-          %li= link_to t(:fail), tasks_path(status: :expired)
+          %li= link_to t(:pending), pending_tasks_path
+          %li= link_to t(:done), done_tasks_path
+          %li= link_to t(:fail), expired_tasks_path

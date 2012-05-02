@@ -1,22 +1,10 @@
 class TasksController < ApplicationController
 
+  before_filter :initialize_task, only: [:index, :done, :pending, :expired]
+
   def index
-    @task = Task.new
-    @tasks = case params[:status]
-               when 'pending'
-                 @title = :pending_tasks
-                 Task.pending
-               when 'done'
-                 @title = :tasks_done
-                 Task.done
-               when 'expired'
-                 @title = :expired_tasks
-                 Task.expired
-               else
-                 @title = :all_tasks
-                 Task
-             end
-    @tasks = @tasks.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+    @title = :all_tasks
+    @tasks = Task.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
   end
 
   def edit
@@ -58,5 +46,31 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tasks_url }
     end
+  end
+
+  def done
+    @title = :tasks_done
+    @tasks = Task.done.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+
+    render 'index'
+  end
+
+  def pending
+    @title = :pending_tasks
+    @tasks = Task.pending.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+
+    render 'index'
+  end
+
+  def expired
+    @title = :expired_tasks
+    @tasks = Task.expired.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+
+    render 'index'
+  end
+
+  private
+  def initialize_task
+    @task = Task.new
   end
 end
