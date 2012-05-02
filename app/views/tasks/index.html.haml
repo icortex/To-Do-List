@@ -16,25 +16,26 @@
     %input.input-medium.search-query{:type => "text"}
       %button.btn{:type => "submit"} Search
 %table.table
-  %tr
-    %th=t(:mark_done)
-    %th=t(:task)
-    %th= t(:deadline)
-    %th= t(:created_at)
-    %th= t(:action)
-
-  - @tasks.each do |task|
+  %thead
     %tr
-      = hidden_field_tag :id, task.id, id: "id_#{task.id}"
-      %td= check_box_tag 'done', nil, task.done, id: "checkbox_#{task.id}", status_url: task_path(task)
-      %td= task.name
-      %td= task.deadline.try(:strftime, '%d %B %Y')
-      %td= task.created_at.strftime('%d %B %Y')
-      %td
-        = link_to edit_task_path(task), class: 'btn btn-primary btn-mini' do
-          %i.icon-edit.icon-white
-          = t(:edit)
-        = link_to task, :confirm => t(:delete_question), :method => :delete, class: 'btn btn-danger btn-mini' do
-          %i.icon-trash.icon-white
-          = t(:delete)
+      %th=t(:mark_done)
+      %th=t(:task)
+      %th= t(:deadline)
+      %th= t(:created_at)
+      %th= t(:action)
+  %tbody
+    - @tasks.each do |task|
+      %tr{ class: "#{task.status}"}
+        = hidden_field_tag :id, task.id, id: "id_#{task.id}"
+        %td= check_box_tag 'done', nil, task.done, id: "checkbox_#{task.id}", status_url: task_path(task), disabled: task.expired?
+        %td.name= task.name
+        %td= task.deadline.try(:strftime, '%d %B %Y')
+        %td.action= task.created_at.strftime('%d %B %Y')
+        %td
+          = link_to edit_task_path(task), class: 'btn btn-primary btn-mini' do
+            %i.icon-edit.icon-white
+            = t(:edit)
+          = link_to task, :confirm => t(:delete_question), :method => :delete, class: 'btn btn-danger btn-mini' do
+            %i.icon-trash.icon-white
+            = t(:delete)
 = will_paginate @tasks

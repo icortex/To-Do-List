@@ -7,5 +7,13 @@ class Task < ActiveRecord::Base
   scope :active, where('deadline >= ?', Date.today)
   scope :pending, where(done: false).active
   scope :done, where(done: true)
-  scope :expired, where('deadline < ?', Date.today)
+  scope :expired, where('deadline < ? AND done = ?', Date.today, false)
+
+  def status
+    'expired' if deadline && self.expired?
+  end
+
+  def expired?
+    self.deadline.try(:<, Date.today) && !self.done?
+  end
 end

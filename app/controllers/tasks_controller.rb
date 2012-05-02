@@ -21,7 +21,7 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
-    session[:return_to] ||= request.referer
+    session[:return_to] = request.referer
   end
 
   def create
