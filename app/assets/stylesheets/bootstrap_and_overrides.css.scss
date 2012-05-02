@@ -9,6 +9,7 @@ $headingsColor: #46A8B9;
 $formActionsBackground: none;
 
 @import "bootstrap";
+@import "bootstrap-responsive";
 
 header {
   margin-top: 20px;
@@ -18,7 +19,13 @@ header {
   background: none;
 }
 
-@import "bootstrap-responsive";
+button.close {
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
 
 .table th, .table td {
   text-align: center;

@@ -15,6 +15,10 @@
     #main.container
       .row
         .span9
+          - if flash[:notice]
+            .alert.alert-success
+              %button.close{'data-dismiss' => 'alert'} ×
+              = flash[:notice]
           = yield
         .span3
           .heading
