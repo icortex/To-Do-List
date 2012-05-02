@@ -14,8 +14,9 @@ class TasksController < ApplicationController
                  Task.expired
                else
                  @title = :all_tasks
-                 Task.all
+                 Task
              end
+    @tasks = @tasks.paginate(:page => params[:page], :per_page => 10)
   end
 
   def edit
@@ -29,10 +30,8 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.save
         format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
-        format.json { render json: @task, status: :created, location: @task }
       else
         format.html { render action: "index" }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,10 +42,8 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update_attributes(params[:task])
         format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,7 +54,6 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to tasks_url }
-      format.json { head :no_content }
     end
   end
 end
