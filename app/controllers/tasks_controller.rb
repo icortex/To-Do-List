@@ -16,11 +16,12 @@ class TasksController < ApplicationController
                  @title = :all_tasks
                  Task
              end
-    @tasks = @tasks.paginate(:page => params[:page], :per_page => 10)
+    @tasks = @tasks.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
   end
 
   def edit
     @task = Task.find(params[:id])
+    session[:return_to] ||= request.referer
   end
 
   def create
@@ -39,12 +40,14 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
 
-    respond_to do |format|
-      if @task.update_attributes(params[:task])
-        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
+    if @task.update_attributes(params[:task])
+      if request.xhr?
+        render text: request.referer
       else
-        format.html { render action: "edit" }
+        redirect_to session[:return_to], notice: 'Task was successfully updated.'
       end
+    else
+      render action: "edit"
     end
   end
 

@@ -10,3 +10,18 @@ $ ->
 
   if $(".alert-error")[0]?
     $("#new_task_container").collapse('show')
+
+  $(':checkbox').click ->
+    status_url = $(@).attr('status_url')
+    status = $(@).is(':checked')
+    sendStatus(status_url, status)
+
+sendStatus = (status_url, status) ->
+  $.ajax
+    type: "PUT"
+    url: status_url
+    data: {task: {done: status}}
+    success: (redirect_url) ->
+      window.location.href = redirect_url
+    error: (redirect_url) ->
+      window.location.href = redirect_url

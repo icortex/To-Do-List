@@ -16,7 +16,8 @@
 
   - @tasks.each do |task|
     %tr
-      %td= task.done
+      = hidden_field_tag :id, task.id, id: "id_#{task.id}"
+      %td= check_box_tag 'done', nil, task.done, id: "checkbox_#{task.id}", status_url: task_path(task)
       %td= task.name
       %td= task.deadline.try(:strftime, '%d %B %Y')
       %td= task.created_at.strftime('%d %B %Y')
