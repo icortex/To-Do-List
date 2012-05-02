@@ -5,10 +5,6 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
-  def new
-    @task = Task.new
-  end
-
   def edit
     @task = Task.find(params[:id])
   end
