@@ -1,8 +1,17 @@
 class TasksController < ApplicationController
 
   def index
-    @tasks = Task.all
     @task = Task.new
+    @tasks = case params[:status]
+      when 'pending'
+       Task.pending
+      when 'done'
+        Task.done
+      when 'expired'
+        Task.expired
+      else
+        Task.all
+    end
   end
 
   def edit

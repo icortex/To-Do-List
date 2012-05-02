@@ -3,7 +3,7 @@
     .span9
       %nav
         %ul.primary_nav
-          %li= link_to t(:all), '#'
-          %li= link_to t(:pending), '#'
-          %li= link_to t(:done), '#'
-          %li= link_to t(:fail), '#'
+          %li= link_to t(:all), tasks_path
+          %li= link_to t(:pending), tasks_path(status: :pending)
+          %li= link_to t(:done), tasks_path(status: :done)
+          %li= link_to t(:fail), tasks_path(status: :expired)
