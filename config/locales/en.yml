@@ -31,3 +31,8 @@ en:
   fail: "Expired"
   cancel: "Cancel"
   back: "Back"
+  delete_question: "Are you sure you want to delete your task?"
+  today: "Today"
+  week: "Week"
+  month: "Month"
+  any: "Any"

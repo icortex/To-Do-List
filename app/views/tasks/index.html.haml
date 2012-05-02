@@ -6,6 +6,15 @@
     'data-target'=>"#new_task_container", class: 'btn btn-success' do
     %i.icon-pencil.icon-white
     = t(:new_task)
+.filter
+  .btn-group{"data-toggle" => "buttons-radio"}
+    = button_tag t(:today), class: 'btn'
+    = button_tag t(:week), class: 'btn'
+    = button_tag t(:month), class: 'btn'
+    = button_tag t(:any), class: 'btn'
+  %form.form-search
+    %input.input-medium.search-query{:type => "text"}
+      %button.btn{:type => "submit"} Search
 %table.table
   %tr
     %th=t(:mark_done)
@@ -25,7 +34,7 @@
         = link_to edit_task_path(task), class: 'btn btn-primary btn-mini' do
           %i.icon-edit.icon-white
           = t(:edit)
-        = link_to task, :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger btn-mini' do
+        = link_to task, :confirm => t(:delete_question), :method => :delete, class: 'btn btn-danger btn-mini' do
           %i.icon-trash.icon-white
           = t(:delete)
 = will_paginate @tasks
