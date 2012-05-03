@@ -11,7 +11,7 @@ $ ->
   if $(".alert-error")[0]?
     $("#new_task_container").collapse('show')
 
-  $(':checkbox').click ->
+  $(':checkbox').change ->
     status_url = $(@).attr('status_url')
     status = $(@).is(':checked')
     sendStatus(status_url, status)

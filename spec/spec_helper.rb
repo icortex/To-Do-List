@@ -18,7 +18,27 @@ Spork.prefork do
 
   # Capybara
   Capybara.default_host = "http://127.0.0.1"
+  #Capybara.javascript_driver = :webkit
   Capybara.javascript_driver = :webkit
+
+  class Capybara::Selenium::Node
+    def set(value)
+      if tag_name == 'input' and type == 'radio'
+        click
+      elsif tag_name == 'input' and type == 'checkbox'
+        click
+      elsif tag_name == 'input' and type == 'file'
+        resynchronize do
+          native.send_keys(value.to_s)
+        end
+      elsif tag_name == 'textarea' or tag_name == 'input'
+        resynchronize do
+          native.clear
+          native.send_keys(value.to_s)
+        end
+      end
+    end
+  end
 
   RSpec.configure do |config|
     # ## Mock Framework

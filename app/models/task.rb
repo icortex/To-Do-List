@@ -16,4 +16,9 @@ class Task < ActiveRecord::Base
   def expired?
     self.deadline.try(:<, Date.today) && !self.done?
   end
+
+  def mark_as_done
+    self.done = true
+    save
+  end
 end
