@@ -4,7 +4,7 @@ class TasksController < ApplicationController
 
   def index
     @title = :all_tasks
-    @tasks = Task.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+    @tasks = Task.order('deadline DESC').paginate(:page => params[:page], :per_page => 10)
   end
 
   def edit
@@ -14,7 +14,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(params[:task])
-    @tasks = Task.all
+    @tasks = Task.paginate(:page => params[:page], :per_page => 10)
 
     respond_to do |format|
       if @task.save
@@ -50,21 +50,21 @@ class TasksController < ApplicationController
 
   def done
     @title = :tasks_done
-    @tasks = Task.done.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+    @tasks = Task.done.order('deadline DESC').paginate(:page => params[:page], :per_page => 10)
 
     render 'index'
   end
 
   def pending
     @title = :pending_tasks
-    @tasks = Task.pending.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+    @tasks = Task.pending.order('deadline DESC').paginate(:page => params[:page], :per_page => 10)
 
     render 'index'
   end
 
   def expired
     @title = :expired_tasks
-    @tasks = Task.expired.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+    @tasks = Task.expired.order('deadline DESC').paginate(:page => params[:page], :per_page => 10)
 
     render 'index'
   end
