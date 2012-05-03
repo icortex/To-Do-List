@@ -12,16 +12,16 @@
     = button_tag t(:week), class: 'btn'
     = button_tag t(:month), class: 'btn'
     = button_tag t(:any), class: 'btn'
-  %form.form-search
-    %input.input-medium.search-query{:type => "text"}
-      %button.btn{:type => "submit"} Search
+  = search_form_for @q, html: {class: 'form-search'} do |f|
+    = f.text_field :name_cont, :class => '.input-medium search-query'
+    = f.submit t(:search), class: 'btn'
 %table.table
   %thead
     %tr
-      %th=t(:mark_done)
-      %th=t(:task)
-      %th= t(:deadline)
-      %th= t(:created_at)
+      %th= t(:mark_done)
+      %th= sort_link @q, :name, t(:task), {page: params[:page]}
+      %th= sort_link @q, :deadline, t(:deadline), {page: params[:page]}
+      %th= sort_link @q, :created_at, t(:created_at), {page: params[:page]}
       %th= t(:action)
   %tbody
     - @tasks.each do |task|
