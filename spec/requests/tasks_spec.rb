@@ -83,6 +83,5 @@ describe "Tasks", :focus do
       should have_content 'Buy milk'
       should have_content '21 December 2012'
     end
-
   end
 end
