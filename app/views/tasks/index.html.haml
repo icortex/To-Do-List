@@ -8,10 +8,11 @@
     = t(:new_task)
 .filter
   .btn-group{"data-toggle" => "buttons-radio"}
-    = link_to t(:today), params.merge(q: {deadline_eq: Date.today}), class: 'btn'
-    = link_to t(:week), params.merge(q: {deadline_gteq: Date.today.beginning_of_week, deadline_lteq: Date.today.end_of_week}), class: 'btn'
-    = link_to t(:month), params.merge(q: {deadline_gteq: Date.today.beginning_of_month, deadline_lteq: Date.today.end_of_month}), class: 'btn'
-    = link_to t(:any), request.fullpath, class: "btn #{@date_link_class}"
+    -#= link_to t(:today), params.merge(q: {deadline_eq: Date.today}), class: "btn #{params[:q].has_key?(:deadline_eq) ? 'active' : nil}"
+    = link_to t(:today), params.merge(q: {deadline_eq: Date.today}, f: :today).except(:page), class: "btn #{is_active_date?(:today)}"
+    = link_to t(:week), params.merge(q: {deadline_gteq: Date.today.beginning_of_week, deadline_lteq: Date.today.end_of_week}, f: :week).except(:page), class: "btn #{is_active_date?(:week)}"
+    = link_to t(:month), params.merge(q: {deadline_gteq: Date.today.beginning_of_month, deadline_lteq: Date.today.end_of_month}, f: :month).except(:page), class: "btn #{is_active_date?(:month)}"
+    = link_to t(:any), params[:q].except(:deadline_gteq, :deadline_lteq, :page), class: "btn #{is_active_any_date?}"
   = search_form_for @q, html: {class: 'form-search'} do |f|
     = f.text_field :name_cont, :class => '.input-medium search-query'
     = f.submit t(:search), class: 'btn'
@@ -19,9 +20,9 @@
   %thead
     %tr
       %th= t(:mark_done)
-      %th= sort_link @q, :name, t(:task), {page: params[:page]}
-      %th= sort_link @q, :deadline, t(:deadline), {page: params[:page]}
-      %th= sort_link @q, :created_at, t(:created_at), {page: params[:page]}
+      %th= sort_link @q, :name, t(:task), {page: params[:page], f: params[:f]}
+      %th= sort_link @q, :deadline, t(:deadline), {page: params[:page], f: params[:f]}
+      %th= sort_link @q, :created_at, t(:created_at), {page: params[:page], f: params[:f]}
       %th= t(:action)
   %tbody
     - @tasks.each do |task|
