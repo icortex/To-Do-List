@@ -8,10 +8,10 @@
     = t(:new_task)
 .filter
   .btn-group{"data-toggle" => "buttons-radio"}
-    = button_tag t(:today), class: 'btn'
-    = button_tag t(:week), class: 'btn'
-    = button_tag t(:month), class: 'btn'
-    = button_tag t(:any), class: 'btn'
+    = link_to t(:today), params.merge(q: {deadline_eq: Date.today}), class: 'btn'
+    = link_to t(:week), params.merge(q: {deadline_gteq: Date.today.beginning_of_week, deadline_lteq: Date.today.end_of_week}), class: 'btn'
+    = link_to t(:month), params.merge(q: {deadline_gteq: Date.today.beginning_of_month, deadline_lteq: Date.today.end_of_month}), class: 'btn'
+    = link_to t(:any), request.fullpath, class: "btn #{@date_link_class}"
   = search_form_for @q, html: {class: 'form-search'} do |f|
     = f.text_field :name_cont, :class => '.input-medium search-query'
     = f.submit t(:search), class: 'btn'

@@ -1,11 +1,12 @@
 class TasksController < ApplicationController
 
   before_filter :initialize_task, only: [:index, :done, :pending, :expired]
-  before_filter :initialize_query, only: [:index, :done, :pending, :expired]
+  #before_filter :initialize_query, only: [:index, :done, :pending, :expired]
 
   def index
     @title = :all_tasks
-    @tasks = @q.result.paginate(:page => params[:page], :per_page => 10)
+    @q, @tasks = Task.search(params)
+    #@tasks = @q.result.paginate(:page => params[:page], :per_page => 10)
   end
 
   def edit
@@ -51,8 +52,8 @@ class TasksController < ApplicationController
 
   def done
     @title = :tasks_done
-    @tasks = Task.done.order('deadline DESC').paginate(:page => params[:page], :per_page => 10)
-
+    #@tasks = Task.done.order('deadline DESC').paginate(:page => params[:page], :per_page => 10)
+    @q, @tasks = Task.search(params)
     render 'index'
   end
 
@@ -71,19 +72,33 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def initialize_task
+    @task = Task.new
+  end
+
   def initialize_query
+    ap params
 
     if params[:q]
       params[:q] = {s: 'deadline asc'}.merge(params[:q])
     else
       params[:q] = {s: 'deadline asc'}
     end
-
-    @q = Task.search(params[:q])
+    case params[:date]
+      when 'any'
+        ap 'vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvd'
+        ap params
+      when 'month'
+        'd'
+      when 'week'
+        'd'
+      when 'day'
+        'd'
+      else
+        'ddd'
+    end
+    @date_link_class = 'disabled'
   end
 
-  private
-  def initialize_task
-    @task = Task.new
-  end
 end
