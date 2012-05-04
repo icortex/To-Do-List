@@ -78,7 +78,7 @@ class TasksController < ApplicationController
 
   def initialize_query
     if params[:q]
-      params[:q] = {s: 'deadline asc'}.merge(params[:q])
+      params[:q].reverse_merge!({s: 'deadline asc'})
     else
       params[:q] = {s: 'deadline asc'}
     end
