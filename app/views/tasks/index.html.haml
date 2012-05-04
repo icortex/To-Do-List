@@ -8,7 +8,6 @@
     = t(:new_task)
 .filter
   .btn-group{"data-toggle" => "buttons-radio"}
-    -#= link_to t(:today), params.merge(q: {deadline_eq: Date.today}), class: "btn #{params[:q].has_key?(:deadline_eq) ? 'active' : nil}"
     = link_to t(:today), date_filter_path(:today), class: "btn #{is_active_date?(:today)}"
     = link_to t(:week), date_filter_path(:week), class: "btn #{is_active_date?(:week)}"
     = link_to t(:month), date_filter_path(:month), class: "btn #{is_active_date?(:month)}"

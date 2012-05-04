@@ -58,14 +58,14 @@ class TasksController < ApplicationController
 
   def pending
     @title = :pending_tasks
-    @tasks = @q.result.pending.order('deadline DESC').paginate(:page => params[:page], :per_page => 10)
+    @tasks = @q.result.pending.paginate(:page => params[:page], :per_page => 10)
 
     render 'index'
   end
 
   def expired
     @title = :expired_tasks
-    @tasks = @q.result.expired.order('deadline DESC').paginate(:page => params[:page], :per_page => 10)
+    @tasks = @q.result.expired.paginate(:page => params[:page], :per_page => 10)
 
     render 'index'
   end
