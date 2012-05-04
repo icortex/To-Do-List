@@ -9,10 +9,10 @@
 .filter
   .btn-group{"data-toggle" => "buttons-radio"}
     -#= link_to t(:today), params.merge(q: {deadline_eq: Date.today}), class: "btn #{params[:q].has_key?(:deadline_eq) ? 'active' : nil}"
-    = link_to t(:today), params.merge(q: {deadline_eq: Date.today}, f: :today).except(:page), class: "btn #{is_active_date?(:today)}"
-    = link_to t(:week), params.merge(q: {deadline_gteq: Date.today.beginning_of_week, deadline_lteq: Date.today.end_of_week}, f: :week).except(:page), class: "btn #{is_active_date?(:week)}"
-    = link_to t(:month), params.merge(q: {deadline_gteq: Date.today.beginning_of_month, deadline_lteq: Date.today.end_of_month}, f: :month).except(:page), class: "btn #{is_active_date?(:month)}"
-    = link_to t(:any), params[:q].except(:deadline_gteq, :deadline_lteq, :page), class: "btn #{is_active_any_date?}"
+    = link_to t(:today), date_filter_path(:today), class: "btn #{is_active_date?(:today)}"
+    = link_to t(:week), date_filter_path(:week), class: "btn #{is_active_date?(:week)}"
+    = link_to t(:month), date_filter_path(:month), class: "btn #{is_active_date?(:month)}"
+    = link_to t(:any), date_filter_path(:any), class: "btn #{is_active_any_date?}"
   = search_form_for @q, html: {class: 'form-search'} do |f|
     = f.text_field :name_cont, :class => '.input-medium search-query'
     = f.submit t(:search), class: 'btn'

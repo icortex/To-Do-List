@@ -7,4 +7,19 @@ module TasksHelper
   def is_active_any_date?
     'active' if !params.has_key?('f')
   end
+
+  def date_filter_path(filter)
+    case filter
+      when :today
+        params.merge(q: {deadline_eq: Date.today}, f: :today).except(:page)
+      when :week
+        params.merge(q: {deadline_gteq: Date.today.beginning_of_week, deadline_lteq: Date.today.end_of_week}, f: :week).except(:page)
+      when :month
+        params.merge(q: {deadline_gteq: Date.today.beginning_of_month, deadline_lteq: Date.today.end_of_month}, f: :month).except(:page)
+      when :any
+        params[:q].except(:deadline_gteq, :deadline_lteq, :page)
+      else
+        nil
+    end
+  end
 end
