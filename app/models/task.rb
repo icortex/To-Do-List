@@ -9,23 +9,6 @@ class Task < ActiveRecord::Base
   scope :done, where(done: true)
   scope :expired, where('deadline < ? AND done = ?', Date.today, false)
 
-  def self.search(params)
-    ap 'the raw params'
-    ap params
-    if params[:q]
-      params[:q] = {s: 'deadline asc'}.merge(params[:q])
-    else
-      params[:q] = {s: 'deadline asc'}
-    end
-
-    ap 'query params'
-    ap params[:q]
-    q = ransack(params[:q])
-    task = q.result.paginate(:page => params[:page], :per_page => 10)
-    [q, task]
-
-  end
-
   def status
     'expired' if deadline && self.expired?
   end
