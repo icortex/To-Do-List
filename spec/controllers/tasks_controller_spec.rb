@@ -6,7 +6,7 @@ describe TasksController do
   # Task. As you add validations to Task, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {name: "Buy Milk", deadline: DateTime.tomorrow}
+    {name: "Buy Milk", deadline: DateTime.tomorrow, done: false}
   end
   
   # This should return the minimal set of values that should be in the session
@@ -16,11 +16,37 @@ describe TasksController do
     {return_to: tasks_path}
   end
 
-  describe "GET index" do
-    it "assigns all tasks as @tasks" do
-      task = Task.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:tasks).should eq([task])
+  describe 'task listing', :clean_db do
+    describe "GET index" do
+      it "assigns all tasks as @tasks" do
+        task = Task.create! valid_attributes
+        get :index, {}, valid_session
+        assigns(:tasks).should eq([task])
+      end
+    end
+
+    describe "GET done" do
+      it "assigns done tasks as @tasks" do
+        task = Task.create! valid_attributes.merge(done: true)
+        get :done, {}, valid_session
+        assigns(:tasks).should eq([task])
+      end
+    end
+
+    describe "GET pending" do
+      it "assigns pending tasks as @tasks" do
+        task = Task.create! valid_attributes
+        get :pending, {}, valid_session
+        assigns(:tasks).should eq([task])
+      end
+    end
+
+    describe "GET expired" do
+      it "assigns tasks as @tasks" do
+        task = Task.create! valid_attributes.merge(deadline: Date.yesterday)
+        get :expired, {}, valid_session
+        assigns(:tasks).should eq([task])
+      end
     end
   end
 
