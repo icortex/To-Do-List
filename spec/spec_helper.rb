@@ -18,7 +18,6 @@ Spork.prefork do
 
   # Capybara
   Capybara.default_host = "http://127.0.0.1"
-  #Capybara.javascript_driver = :webkit
   Capybara.javascript_driver = :webkit
 
   #class Capybara::Selenium::Node
