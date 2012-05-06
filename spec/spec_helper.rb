@@ -21,24 +21,24 @@ Spork.prefork do
   #Capybara.javascript_driver = :webkit
   Capybara.javascript_driver = :webkit
 
-  class Capybara::Selenium::Node
-    def set(value)
-      if tag_name == 'input' and type == 'radio'
-        click
-      elsif tag_name == 'input' and type == 'checkbox'
-        click
-      elsif tag_name == 'input' and type == 'file'
-        resynchronize do
-          native.send_keys(value.to_s)
-        end
-      elsif tag_name == 'textarea' or tag_name == 'input'
-        resynchronize do
-          native.clear
-          native.send_keys(value.to_s)
-        end
-      end
-    end
-  end
+  #class Capybara::Selenium::Node
+  #  def set(value)
+  #    if tag_name == 'input' and type == 'radio'
+  #      click
+  #    elsif tag_name == 'input' and type == 'checkbox'
+  #      click
+  #    elsif tag_name == 'input' and type == 'file'
+  #      resynchronize do
+  #        native.send_keys(value.to_s)
+  #      end
+  #    elsif tag_name == 'textarea' or tag_name == 'input'
+  #      resynchronize do
+  #        native.clear
+  #        native.send_keys(value.to_s)
+  #      end
+  #    end
+  #  end
+  #end
 
   RSpec.configure do |config|
     # ## Mock Framework
@@ -78,11 +78,6 @@ Spork.prefork do
       DatabaseCleaner.start
       DatabaseCleaner.clean
     end
-    config.after(:each, :clean_db => true) do |example|
-      # Clean the database
-      puts '-database cleaned-'
-    end
-    # clean
     config.before(:each, :clean_mail => true) do |example|
       # Clear deliveries so that indexes match for isolated examples
       ActionMailer::Base.deliveries.clear
