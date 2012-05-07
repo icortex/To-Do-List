@@ -1,9 +1,14 @@
-.container
-  .row
-    .span9
-      %nav
-        %ul.primary_nav
-          %li= link_to t(:all), tasks_path
-          %li= link_to t(:pending), pending_tasks_path
-          %li= link_to t(:done), done_tasks_path
-          %li= link_to t(:fail), expired_tasks_path
+.navbar-inner
+  .container
+
+    %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+
+    .nav-collapse
+      %ul.nav.primary_nav
+        %li= link_to t(:all), tasks_path
+        %li= link_to t(:pending), pending_tasks_path
+        %li= link_to t(:done), done_tasks_path
+        %li= link_to t(:fail), expired_tasks_path
