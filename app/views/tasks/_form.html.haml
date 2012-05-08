@@ -1,8 +1,8 @@
-= simple_form_for(@task, :html => { :class => 'form-horizontal' }) do |f|
+= simple_form_for(@task, html: { class: 'form-horizontal' }) do |f|
   = f.error_notification
   .form-inputs
     = f.input :name
-    = f.input :deadline, as: :string, :input_html => { :class => 'datepicker' }
+    = f.input :deadline, as: :string, input_html: { class: 'datepicker' }
   .form-actions
     = f.button :submit, class: 'btn btn-primary'
     - if @task.new_record?

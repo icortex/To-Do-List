@@ -8,13 +8,9 @@ $formActionsBackground: none;
 @import "bootstrap";
 @import "bootstrap-responsive";
 
-header {
-  margin-top: 20px;
-}
+header { margin-top: 20px; }
 
-.form-actions {
-  background: none;
-}
+.form-actions { background: none; }
 
 button.close {
   padding: 0;
@@ -24,9 +20,7 @@ button.close {
   -webkit-appearance: none;
 }
 
-.table th, .table td {
-  text-align: center;
-}
+.table th, .table td { text-align: center; }
 
 .form-search {
   display: inline;
@@ -34,9 +28,7 @@ button.close {
   margin: 0;
 }
 
-.btn-group {
-  display: inline;
-}
+.btn-group { display: inline; }
 
 .sort_link {
   color: #333;

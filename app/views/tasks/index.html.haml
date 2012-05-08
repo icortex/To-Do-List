@@ -1,3 +1,4 @@
+= content_for :title, "Quipper - #{t(@title)}"
 #new_task_container.collapse
   = render 'new'
 .heading
@@ -13,7 +14,7 @@
     = link_to t(:month), date_filter_path(:month), class: "btn #{is_active_date?(:month)}"
     = link_to t(:any), date_filter_path(:any), class: "btn #{is_active_any_date?}"
   = search_form_for @q, html: {class: 'form-search'} do |f|
-    = f.text_field :name_cont, :class => '.input-medium search-query'
+    = f.text_field :name_cont, class: '.input-medium search-query'
     = f.submit t(:search), class: 'btn', id: 'search-btn'
 %table.table
   %thead
@@ -25,7 +26,7 @@
       %th= t(:action)
   %tbody
     - @tasks.each do |task|
-      %tr{ class: "#{task.status}"}
+      %tr{ class: "#{task_row_class(task)}"}
         = hidden_field_tag :id, task.id, id: "id_#{task.id}"
         %td= check_box_tag 'done', nil, task.done, id: "checkbox_#{task.id}", status_url: task_path(task), disabled: task.expired?
         %td.name= task.name
@@ -35,7 +36,7 @@
           = link_to edit_task_path(task), class: 'btn btn-primary btn-mini', title: t(:edit) do
             %i.icon-edit.icon-white
             %span.link-name.hidden-phone= t(:edit)
-          = link_to task, :confirm => t(:delete_question), :method => :delete, class: 'btn btn-danger btn-mini', title: t(:delete) do
+          = link_to task, confirm: t(:delete_question), method: :delete, class: 'btn btn-danger btn-mini', title: t(:delete) do
             %i.icon-trash.icon-white
             %span.hidden-phone.link-name= t(:delete)
 = will_paginate @tasks, class: 'pagination hidden-phone'

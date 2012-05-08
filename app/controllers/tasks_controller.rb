@@ -10,6 +10,7 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
+
     session[:return_to] = request.referer
   end
 
@@ -19,8 +20,9 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
+        format.html { redirect_to tasks_path, notice: t(:task_created) }
       else
+        initialize_query
         format.html { render action: "index" }
       end
     end
@@ -33,7 +35,7 @@ class TasksController < ApplicationController
       if request.xhr?
         render text: request.referer
       else
-        redirect_to session[:return_to], notice: 'Task was successfully updated.'
+        redirect_to session[:return_to], notice: t(:task_updated)
       end
     else
       render action: "edit"
@@ -71,18 +73,13 @@ class TasksController < ApplicationController
   end
 
   private
-
   def initialize_task
     @task = Task.new
   end
 
   def initialize_query
-    if params[:q]
-      params[:q].reverse_merge!({s: 'deadline asc'})
-    else
-      params[:q] = {s: 'deadline asc'}
-    end
+    params[:q] = params[:q] ? params[:q].reverse_merge({ s: 'deadline asc' }) : { s: 'deadline asc' }
+
     @q = Task.search(params[:q])
   end
-
 end

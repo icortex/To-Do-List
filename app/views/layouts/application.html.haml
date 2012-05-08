@@ -6,7 +6,6 @@
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-    = yield(:head)
   %body
     %header.container
       = link_to image_tag('quipper_logo.png', alt: 'Quipper'), root_path
