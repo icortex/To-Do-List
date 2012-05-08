@@ -1,3 +1,42 @@
+@mixin first-child-radius($radius) {
+  -moz-border-radius-topleft: $radius;
+  -webkit-border-top-left-radius: $radius;
+  -o-border-top-left-radius: $radius;
+  -ms-border-top-left-radius: $radius;
+  -khtml-border-top-left-radius: $radius;
+  border-top-left-radius: $radius;
+  -moz-border-radius-bottomleft: $radius;
+  -webkit-border-bottom-left-radius: $radius;
+  -o-border-bottom-left-radius: $radius;
+  -ms-border-bottom-left-radius: $radius;
+  -khtml-border-bottom-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+
+@mixin last-child-radius($radius) {
+  -moz-border-radius-topright: $radius;
+  -webkit-border-top-right-radius: $radius;
+  -o-border-top-right-radius: $radius;
+  -ms-border-top-right-radius: $radius;
+  -khtml-border-top-right-radius: $radius;
+  border-top-right-radius: $radius;
+  -moz-border-radius-bottomright: $radius;
+  -webkit-border-bottom-right-radius: $radius;
+  -o-border-bottom-right-radius: $radius;
+  -ms-border-bottom-right-radius: $radius;
+  -khtml-border-bottom-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+@mixin ul-border-radius($radius) {
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -o-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -khtml-border-radius: $radius;
+  border-radius: $radius;
+}
+
 body {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #E3E3E3), color-stop(100%, #C1E1E8));
   background-image: -webkit-linear-gradient(#E3E3E3 0%, #C1E1E8);
@@ -14,18 +53,11 @@ body {
   background-image: -ms-linear-gradient(#FEFEFE, #E8E8E8);
   background-image: linear-gradient(#FEFEFE,#E8E8E8);
   background-color:#fefefe;
-  -moz-border-radius:2.5em;
-  -webkit-border-radius:2.5em;
-  -o-border-radius:2.5em;
-  -ms-border-radius:2.5em;
-  -khtml-border-radius:2.5em;
-  border-radius:2.5em;
+  @include ul-border-radius(2.5em);
   -moz-box-shadow:rgba(140,137,137,0.8) 1px 1px 3px;
   -webkit-box-shadow:rgba(140,137,137,0.8) 1px 1px 3px;
   -o-box-shadow:rgba(140,137,137,0.8) 1px 1px 3px;
   box-shadow:rgba(140,137,137,0.8) 1px 1px 3px;
-  clear:both;
-  overflow:hidden;
 }
 
 .navbar ul.primary_nav {
@@ -34,7 +66,7 @@ body {
   border:0;
   list-style:none;
   display:inline;
-  float:left
+  float:left;
 }
 
 .navbar ul.primary_nav li {
@@ -60,7 +92,6 @@ body {
   text-decoration:none;
   text-align:center;
   width: 120px;
-
 }
 
 .navbar ul.primary_nav li a:hover {
@@ -70,34 +101,12 @@ body {
 
 .navbar ul.primary_nav li:first-child a {
   padding-left:2.7em;
-  -moz-border-radius-topleft:2.5em;
-  -webkit-border-top-left-radius:2.5em;
-  -o-border-top-left-radius:2.5em;
-  -ms-border-top-left-radius:2.5em;
-  -khtml-border-top-left-radius:2.5em;
-  border-top-left-radius:2.5em;
-  -moz-border-radius-bottomleft:2.5em;
-  -webkit-border-bottom-left-radius:2.5em;
-  -o-border-bottom-left-radius:2.5em;
-  -ms-border-bottom-left-radius:2.5em;
-  -khtml-border-bottom-left-radius:2.5em;
-  border-bottom-left-radius:2.5em
+  @include first-child-radius(2.5em);
 }
 
 .navbar ul.primary_nav li:last-child a {
   padding-right:2.7em;
-  -moz-border-radius-topright:2.5em;
-  -webkit-border-top-right-radius:2.5em;
-  -o-border-top-right-radius:2.5em;
-  -ms-border-top-right-radius:2.5em;
-  -khtml-border-top-right-radius:2.5em;
-  border-top-right-radius:2.5em;
-  -moz-border-radius-bottomright:2.5em;
-  -webkit-border-bottom-right-radius:2.5em;
-  -o-border-bottom-right-radius:2.5em;
-  -ms-border-bottom-right-radius:2.5em;
-  -khtml-border-bottom-right-radius:2.5em;
-  border-bottom-right-radius:2.5em
+  @include last-child-radius(2.5em);
 }
 
 @media (max-width: 480px) {
@@ -106,5 +115,29 @@ body {
   }
   #search-btn {
     margin-top: 8px;
+  }
+  .navbar ul.primary_nav {
+    width: 100%;
+    @include ul-border-radius(0);
+    margin-top: 0;
+  }
+  .navbar ul.primary_nav li {
+    display: block;
+    float: none;
+    border-bottom: 1px solid #CCC;
+    &:first-child a {
+      padding-left: 1.5em;
+      @include first-child-radius(0);
+    }
+    &:last-child a {
+      padding-right: 1.5em;
+      @include last-child-radius(0);
+    }
+    a {
+      display: block;
+      float: none;
+      margin: 0;
+      width: auto;
+    }
   }
 }
