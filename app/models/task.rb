@@ -4,8 +4,7 @@ class Task < ActiveRecord::Base
   validates_presence_of :name
   validates_length_of :name, maximum: 32
 
-  scope :active, where('deadline >= ?', Date.today)
-  scope :pending, where(done: false).active
+  scope :pending, where('deadline >= ? AND done = ?', Date.today, false)
   scope :done, where(done: true)
   scope :expired, where('deadline < ? AND done = ?', Date.today, false)
 

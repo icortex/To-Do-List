@@ -1,14 +1,15 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :task do
+  factory :task, aliases: :pending_task do
 
     name 'Buy milk'
-    deadline Date.parse('2012-12-21')
+    deadline Date.tomorrow
     done false
 
     factory :expired_task do
       deadline Date.yesterday
+      done false
     end
 
     factory :done_task do
