@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :task do
 
     name 'Buy milk'
-    deadline Date.tomorrow
+    deadline Date.parse('2012-12-21')
     done false
 
     factory :expired_task do

@@ -30,6 +30,7 @@ en:
   done: "Done"
   expired: "Expired"
   cancel: "Cancel"
+  ok: "OK"
   back: "Back"
   delete_question: "Are you sure you want to delete your task?"
   today: "Today"
