@@ -4,6 +4,11 @@ require 'spork'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
+# Add I18n helper method anywhere
+def t(*args)
+  I18n.t(*args)
+end
+
 Spork.prefork do
   # This file is copied to spec/ when you run 'rails generate rspec:install'
   ENV["RAILS_ENV"] ||= 'test'
@@ -48,6 +53,10 @@ Spork.prefork do
     # config.mock_with :flexmock
     # config.mock_with :rr
     # config.mock_with :rr
+
+
+    # Factory girl
+    config.include FactoryGirl::Syntax::Methods
 
     config.mock_with :rspec
 

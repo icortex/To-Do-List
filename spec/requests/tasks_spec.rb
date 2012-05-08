@@ -6,9 +6,9 @@ describe "Tasks" do
     describe "should be able to create a task so that he/she does not forget something to do" do
       before(:all) do
         visit root_path
-        click_link 'New Task'
+        click_link t(:new_task)
         fill_in 'task_name', with: 'Buy milk'
-        click_button 'Create Task'
+        click_button t(:create_task)
       end
 
       subject {page}
@@ -21,10 +21,10 @@ describe "Tasks" do
     describe "should be able to create a task with a deadline so that he/she does not miss deadline" do
       before do
         visit root_path
-        click_link 'New Task'
+        click_link t(:new_task)
         fill_in 'task_name', with: 'Buy milk'
         fill_in 'task_deadline', with: '2012-12-21'
-        click_button 'Create Task'
+        click_button t(:create_task)
       end
 
       subject {page}
@@ -37,15 +37,14 @@ describe "Tasks" do
 
     describe "should be able to edit a task so that he/she can change a task after it has been created" do
 
-      # Factory would be nice
-      let!(:task){Task.create!(name: 'Buy milk', deadline: Date.tomorrow)}
+      let!(:task){create(:task)}
 
       before do
         visit root_path
         click_link 'Edit'
         fill_in 'task_name', with: 'Buy milk'
         fill_in 'task_deadline', with: '2012-12-21'
-        click_button 'Update Task'
+        click_button t(:update_task)
       end
 
       subject {page}
@@ -58,8 +57,7 @@ describe "Tasks" do
 
     describe "should be able to mark a task as done so that he/she can distinguish incomplete tasks from complete ones" do
 
-      # Factory would be nice
-      let!(:task){Task.create!(name: 'Buy milk', deadline: Date.parse('2012-12-21'))}
+      let!(:task){create(:task, deadline: Date.parse('2012-12-21'))}
 
       before do
         visit root_path
@@ -77,6 +75,25 @@ describe "Tasks" do
         task.mark_as_done
         click_link 'Done'
         should_have_the_task_listed
+      end
+
+    end
+
+    describe "should be able to see all tasks which didn't meet deadline as of today" do
+
+      let!(:task){create(:expired_task)}
+
+      before do
+        visit root_path
+        click_link t(:expired)
+      end
+
+      subject {page}
+      it "should be in the expired list" do
+        task.mark_as_done
+        click_link t(:done)
+        should have_content 'Buy milk'
+        should have_content Date.yesterday.strftime('%d %B %Y')
       end
 
     end
