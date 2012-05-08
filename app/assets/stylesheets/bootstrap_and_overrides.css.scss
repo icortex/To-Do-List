@@ -8,12 +8,6 @@ $formActionsBackground: none;
 @import "bootstrap";
 @import "bootstrap-responsive";
 
-@media (max-width: 480px) {
-  #task_search {
-    margin: 10px 0;
-  }
-}
-
 header {
   margin-top: 20px;
 }
@@ -68,3 +62,20 @@ button.close {
   }
 }
 
+.btn-navbar, .btn-navbar:hover {
+  margin-right: 0;
+  background-color: transparent;
+  background-image: -moz-linear-gradient(top, #FEFEFE, #E8E8E8);
+  background-image: -ms-linear-gradient(top, #FEFEFE, #E8E8E8);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FEFEFE), to(#E8E8E8));
+  background-image: -webkit-linear-gradient(top, #FEFEFE, #E8E8E8);
+  background-image: -o-linear-gradient(top, #FEFEFE, #E8E8E8);
+  background-image: linear-gradient(top, #FEFEFE, #E8E8E8);
+  background-repeat: repeat-x;
+  border-color: #E8E8E8 #E8E8E8 #FEFEFE;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) fadein(rgba(0, 0, 0, 0.1), 15%);
+
+  .icon-bar {
+    background-color: #525252;
+  }
+}

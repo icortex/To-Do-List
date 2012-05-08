@@ -14,7 +14,7 @@
     = link_to t(:any), date_filter_path(:any), class: "btn #{is_active_any_date?}"
   = search_form_for @q, html: {class: 'form-search'} do |f|
     = f.text_field :name_cont, :class => '.input-medium search-query'
-    = f.submit t(:search), class: 'btn'
+    = f.submit t(:search), class: 'btn', id: 'search-btn'
 %table.table
   %thead
     %tr
@@ -32,10 +32,11 @@
         %td= task.deadline.try(:strftime, '%d %B %Y')
         %td.action= task.created_at.strftime('%d %B %Y')
         %td
-          = link_to edit_task_path(task), class: 'btn btn-primary btn-mini' do
+          = link_to edit_task_path(task), class: 'btn btn-primary btn-mini', title: t(:edit) do
             %i.icon-edit.icon-white
-            = t(:edit)
-          = link_to task, :confirm => t(:delete_question), :method => :delete, class: 'btn btn-danger btn-mini' do
+            %span.link-name.hidden-phone= t(:edit)
+          = link_to task, :confirm => t(:delete_question), :method => :delete, class: 'btn btn-danger btn-mini', title: t(:delete) do
             %i.icon-trash.icon-white
-            = t(:delete)
-= will_paginate @tasks
+            %span.hidden-phone.link-name= t(:delete)
+= will_paginate @tasks, class: 'pagination hidden-phone'
+= will_paginate @tasks, page_links: false, class: 'pagination visible-phone'

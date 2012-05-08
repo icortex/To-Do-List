@@ -99,3 +99,12 @@ body {
   -khtml-border-bottom-right-radius:2.5em;
   border-bottom-right-radius:2.5em
 }
+
+@media (max-width: 480px) {
+  #task_search {
+    margin: 10px 0;
+  }
+  #search-btn {
+    margin-top: 8px;
+  }
+}

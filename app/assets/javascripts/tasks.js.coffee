@@ -14,9 +14,9 @@ $ ->
   $(':checkbox').change ->
     status_url = $(@).attr('status_url')
     status = $(@).is(':checked')
-    sendStatus(status_url, status)
+    sendDoneStatus(status_url, status)
 
-sendStatus = (status_url, status) ->
+sendDoneStatus = (status_url, status) ->
   $.ajax
     type: "PUT"
     url: status_url
