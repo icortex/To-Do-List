@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.3'
-gem 'sqlite3'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -18,6 +17,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'awesome_print'
   gem 'factory_girl_rails'
+  gem 'sqlite3'
 end
 
 gem "haml-rails", ">= 0.3.4", :group => :development
