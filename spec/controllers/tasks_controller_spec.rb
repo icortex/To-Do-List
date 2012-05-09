@@ -160,10 +160,10 @@ describe TasksController do
   end
 
   describe 'private methods' do
-    describe "#initialize_query" do
+    describe "#apply_filters" do
 
       before do
-        @controller.send :initialize_query
+        @controller.send :apply_filters
       end
 
       it 'should return a ransack search object' do
@@ -180,7 +180,7 @@ describe TasksController do
 
       it "should override default by-deadline sorting query parameters if params present" do
         params = { q: { s: 'anything'} }
-        @controller.send :initialize_query
+        @controller.send :apply_filters
         params[:q][:s].should == 'anything'
       end
     end

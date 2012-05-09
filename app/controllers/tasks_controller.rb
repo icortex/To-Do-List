@@ -1,11 +1,10 @@
 class TasksController < ApplicationController
 
   before_filter :initialize_task, only: [:index, :done, :pending, :expired]
-  before_filter :initialize_query, only: [:index, :done, :pending, :expired]
+  before_filter :apply_filters, only: [:index, :done, :pending, :expired]
 
   def index
     @title = :all_tasks
-    @tasks = @q.result.paginate(:page => params[:page], :per_page => 8)
   end
 
   def edit
@@ -15,13 +14,12 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(params[:task])
-    @tasks = Task.paginate(:page => params[:page], :per_page => 8)
 
     respond_to do |format|
       if @task.save
         format.html { redirect_to tasks_path, notice: t(:task_created) }
       else
-        initialize_query
+        apply_filters
         format.html { render action: "index" }
       end
     end
@@ -52,21 +50,21 @@ class TasksController < ApplicationController
 
   def done
     @title = :tasks_done
-    @tasks = @q.result.done.paginate(:page => params[:page], :per_page => 8)
+    @tasks = @tasks.done
 
     render 'index'
   end
 
   def pending
     @title = :pending_tasks
-    @tasks = @q.result.pending.paginate(:page => params[:page], :per_page => 8)
+    @tasks = @tasks.pending
 
     render 'index'
   end
 
   def expired
     @title = :expired_tasks
-    @tasks = @q.result.expired.paginate(:page => params[:page], :per_page => 8)
+    @tasks = @tasks.expired
 
     render 'index'
   end
@@ -76,8 +74,9 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
-  def initialize_query
+  def apply_filters
     params[:q] = params[:q] ? params[:q].reverse_merge({ s: 'deadline asc' }) : { s: 'deadline asc' }
     @q = Task.search(params[:q])
+    @tasks = @q.result.paginate(:page => params[:page], :per_page => 8)
   end
 end
