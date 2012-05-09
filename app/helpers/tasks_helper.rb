@@ -27,6 +27,5 @@ module TasksHelper
           nil
       end
     end
-
   end
 end
