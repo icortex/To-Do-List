@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Tasks", :clean_db, :focus do
+describe "Tasks", :clean_db do
 
   describe "A User" do
     describe "should be able to create a task so that he/she does not forget something to do" do
@@ -138,6 +138,78 @@ describe "Tasks", :clean_db, :focus do
           Task.count.should be_zero
         end
 
+      end
+
+    end
+
+    describe "should be able to see paginated results on all lists (10 per page)", :clean_db do
+
+      subject {page}
+      it "should be in the all list" do
+
+        create_tasks_for_two_pages
+
+        visit tasks_path
+        should_show_page_one
+
+        click_link 'Next'
+        should_show_page_two
+
+      end
+
+      it "should be in the expired list" do
+        create_tasks_for_two_pages :expired_task
+
+        visit expired_tasks_path
+        should_show_page_one
+
+        click_link 'Next'
+        should_show_page_two
+      end
+
+      it "should not be in the pending list" do
+        create_tasks_for_two_pages :pending_task
+
+        visit pending_tasks_path
+        should_show_page_one
+
+        click_link 'Next'
+        should_show_page_two
+      end
+
+      it "should not be in the done list" do
+        create_tasks_for_two_pages :done_task
+
+        visit done_tasks_path
+        should_show_page_one
+
+        click_link 'Next'
+        should_show_page_two
+      end
+
+      def should_show_page_one
+        10.times do |i|
+          should have_content "Page 1 Task #{i}"
+        end
+
+        2.times do |i|
+          should_not have_content "Page 2 Task #{10+i}"
+        end
+      end
+
+      def should_show_page_two
+        10.times do |i|
+          should_not have_content "Page 1 Task #{i}"
+        end
+        2.times do |i|
+          should have_content "Page 2 Task #{10+i}"
+        end
+      end
+
+      # Type, expired_task, done_task, pending_task
+      def create_tasks_for_two_pages(type = :task)
+        10.times{ |i| create(type, name: "Page 1 Task #{i}") }
+        2.times{ |i| create(type, name: "Page 2 Task #{10+i}") }
       end
 
     end

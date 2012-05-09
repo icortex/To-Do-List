@@ -10,7 +10,6 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
-
     session[:return_to] = request.referer
   end
 
@@ -79,7 +78,6 @@ class TasksController < ApplicationController
 
   def initialize_query
     params[:q] = params[:q] ? params[:q].reverse_merge({ s: 'deadline asc' }) : { s: 'deadline asc' }
-
     @q = Task.search(params[:q])
   end
 end

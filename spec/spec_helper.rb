@@ -86,6 +86,7 @@ Spork.prefork do
       DatabaseCleaner.start
       DatabaseCleaner.clean
     end
+
     config.before(:each, :clean_mail => true) do |example|
       # Clear deliveries so that indexes match for isolated examples
       ActionMailer::Base.deliveries.clear

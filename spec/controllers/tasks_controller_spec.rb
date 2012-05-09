@@ -8,7 +8,7 @@ describe TasksController do
   def valid_attributes
     {name: "Buy Milk", deadline: DateTime.tomorrow, done: false}
   end
-  
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # TasksController. Be sure to keep this updated too.
@@ -157,6 +157,53 @@ describe TasksController do
       task = Task.create! valid_attributes
       delete :destroy, {:id => task.to_param}, valid_session
       response.should redirect_to(tasks_url)
+    end
+  end
+
+  describe 'private methods' do
+    describe "#initialize_query" do
+
+      before do
+        @controller.send :initialize_query
+      end
+
+      it 'should return a ransack search object' do
+        assigns(:q).should be_a Ransack::Search
+      end
+
+      it "should modify parameters to include query parameter 'q'" do
+        params.should have_key :q
+      end
+
+      it "should modify query parameters to include default sorting by deadline" do
+        params[:q][:s].should == 'deadline asc'
+      end
+
+      it "should override default by-deadline sorting query parameters if params present" do
+        params = {q: {s: 'anything'}}
+        @controller.send :initialize_query
+        params[:q][:s].should == 'anything'
+      end
+
+    end
+
+    describe "#initialize_task" do
+      it 'should initialize a brand new task instance' do
+        @controller.send :initialize_task
+        assigns(:task).should be_a_new Task
+      end
+    end
+  end
+
+  def params
+    @controller.instance_eval do
+      params
+    end
+  end
+
+  def params=(forced_params)
+    @controller.instance_eval do
+      params = forced_params.with_indiferent_access
     end
   end
 
