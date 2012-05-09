@@ -7,12 +7,20 @@ describe TasksController do
       get("/tasks").should route_to("tasks#index")
     end
 
-    it "routes to #new" do
-      get("/tasks/new").should route_to("tasks#new")
+    it "routes to #done" do
+      get("/tasks/done").should route_to("tasks#done")
     end
 
-    it "routes to #show" do
-      get("/tasks/1").should route_to("tasks#show", :id => "1")
+    it "routes to #pending" do
+      get("/tasks/pending").should route_to("tasks#pending")
+    end
+
+    it "routes to #expired" do
+      get("/tasks/expired").should route_to("tasks#expired")
+    end
+
+    it "routes to #new" do
+      get("/tasks/new").should route_to("tasks#new")
     end
 
     it "routes to #edit" do
