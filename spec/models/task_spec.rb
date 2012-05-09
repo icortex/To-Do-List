@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Task do
-  it 'should be a vaild task' do
+  it 'should be a valid task' do
     @task = build(:task)
     @task.should be_valid
   end
