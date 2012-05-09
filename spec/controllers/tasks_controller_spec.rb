@@ -1,19 +1,18 @@
 require 'spec_helper'
 
 describe TasksController do
-
   # This should return the minimal set of attributes required to create a valid
   # Task. As you add validations to Task, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {name: "Buy Milk", deadline: DateTime.tomorrow, done: false}
+    { name: "Buy Milk", deadline: DateTime.tomorrow, done: false }
   end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # TasksController. Be sure to keep this updated too.
   def valid_session
-    {return_to: tasks_path}
+    { return_to: tasks_path }
   end
 
   describe 'task listing', :clean_db do
@@ -53,13 +52,13 @@ describe TasksController do
   describe "GET edit" do
     it "assigns the requested task as @task" do
       task = Task.create! valid_attributes
-      get :edit, {:id => task.to_param}, valid_session
+      get :edit, { :id => task.to_param }, valid_session
       assigns(:task).should eq(task)
     end
 
     it "redirects to previous page in session[:return_to]" do
       task = Task.create! valid_attributes
-      get :edit, {:id => task.to_param}
+      get :edit, {:id => task.to_param }
       session.keys.should include 'return_to' #value was not set!
     end
   end
@@ -68,18 +67,18 @@ describe TasksController do
     describe "with valid params" do
       it "creates a new Task" do
         expect {
-          post :create, {:task => valid_attributes}, valid_session
+          post :create, { :task => valid_attributes }, valid_session
         }.to change(Task, :count).by(1)
       end
 
       it "assigns a newly created task as @task" do
-        post :create, {:task => valid_attributes}, valid_session
+        post :create, { :task => valid_attributes }, valid_session
         assigns(:task).should be_a(Task)
         assigns(:task).should be_persisted
       end
 
       it "redirects to the created task" do
-        post :create, {:task => valid_attributes}, valid_session
+        post :create, { :task => valid_attributes }, valid_session
         response.should redirect_to(tasks_path)
       end
     end
@@ -88,14 +87,14 @@ describe TasksController do
       it "assigns a newly created but unsaved task as @task" do
         # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
-        post :create, {:task => {}}, valid_session
+        post :create, { :task => {} }, valid_session
         assigns(:task).should be_a_new(Task)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
-        post :create, {:task => {}}, valid_session
+        post :create, { :task => {} }, valid_session
         response.should render_template("index")
       end
     end
@@ -109,19 +108,19 @@ describe TasksController do
         # specifies that the Task created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Task.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => task.to_param, :task => {'these' => 'params'}}, valid_session
+        Task.any_instance.should_receive(:update_attributes).with({ 'these' => 'params' })
+        put :update, {:id => task.to_param, :task => { 'these' => 'params'} }, valid_session
       end
 
       it "assigns the requested task as @task" do
         task = Task.create! valid_attributes
-        put :update, {:id => task.to_param, :task => valid_attributes}, valid_session
+        put :update, { :id => task.to_param, :task => valid_attributes }, valid_session
         assigns(:task).should eq(task)
       end
 
       it "redirects to the task" do
         task = Task.create! valid_attributes
-        put :update, {:id => task.to_param, :task => valid_attributes}, valid_session
+        put :update, { :id => task.to_param, :task => valid_attributes }, valid_session
         response.should redirect_to(session[:return_to])
       end
     end
@@ -131,7 +130,7 @@ describe TasksController do
         task = Task.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
-        put :update, {:id => task.to_param, :task => {}}, valid_session
+        put :update, { :id => task.to_param, :task => {} }, valid_session
         assigns(:task).should eq(task)
       end
 
@@ -139,7 +138,7 @@ describe TasksController do
         task = Task.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
-        put :update, {:id => task.to_param, :task => {}}, valid_session
+        put :update, { :id => task.to_param, :task => {} }, valid_session
         response.should render_template("edit")
       end
     end
@@ -149,13 +148,13 @@ describe TasksController do
     it "destroys the requested task" do
       task = Task.create! valid_attributes
       expect {
-        delete :destroy, {:id => task.to_param}, valid_session
+        delete :destroy, { :id => task.to_param }, valid_session
       }.to change(Task, :count).by(-1)
     end
 
     it "redirects to the tasks list" do
       task = Task.create! valid_attributes
-      delete :destroy, {:id => task.to_param}, valid_session
+      delete :destroy, { :id => task.to_param }, valid_session
       response.should redirect_to(tasks_url)
     end
   end
@@ -180,11 +179,10 @@ describe TasksController do
       end
 
       it "should override default by-deadline sorting query parameters if params present" do
-        params = {q: {s: 'anything'}}
+        params = { q: { s: 'anything'} }
         @controller.send :initialize_query
         params[:q][:s].should == 'anything'
       end
-
     end
 
     describe "#initialize_task" do
@@ -206,5 +204,4 @@ describe TasksController do
       params = forced_params.with_indiferent_access
     end
   end
-
 end
