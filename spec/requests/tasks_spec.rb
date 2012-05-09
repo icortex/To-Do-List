@@ -300,6 +300,66 @@ describe "Tasks" do
       end
     end
 
+    context "ordering tasks" do
+      before(:all) do
+        @today_tasks = []
+        @week_tasks = []
+        @month_tasks = []
+
+        @today_tasks << create(:task, name: 'Today 1', deadline: Date.today)
+        @today_tasks << create(:task, name: 'Today 2', deadline: Date.today)
+        @week_tasks << create(:task, name: 'Week 1', deadline: Date.today.end_of_week)
+        @week_tasks << create(:task, name: 'Week 2', deadline: Date.today.end_of_week)
+        @month_tasks << create(:task, name: 'Month 1', deadline: Date.today.end_of_month)
+        @month_tasks << create(:task, name: 'Month 2', deadline: Date.today.end_of_month)
+
+        @tasks = (@today_tasks + @week_tasks + @month_tasks).uniq # no duplicates please
+        @tasks << create(:task, name: 'Other task', deadline: (Date.today.end_of_month + 2.weeks)) #one extra far away from the range
+      end
+
+      before do
+        visit root_path
+      end
+
+      subject {page}
+
+      context "by created at", :clean_db do
+        before do
+          create(:task, name: 'Task two').update_attribute(:created_at, Time.now - 1.hour)
+          create(:task, name: 'Task one').update_attribute(:created_at, Time.now - 2.hours)
+          visit root_path
+          click_link 'sort_created_at'
+        end
+
+        it 'should be able to sort them in ascendant order' do
+          click_link 'sort_created_at'
+          page.body.should match /Task two(.|\n)*Task one/
+        end
+
+        it 'should be able to sort them in descendant order' do
+          page.body.should match /Task one(.|\n)*Task two/
+        end
+      end
+
+      context "by deadline", :clean_db do
+        before do
+          create(:task, name: 'Task one', deadline: Date.today)
+          create(:task, name: 'Task two', deadline: Date.tomorrow)
+          visit root_path
+          click_link 'sort_deadline'
+        end
+
+        it 'should be able to sort them in ascendant order' do
+          click_link 'sort_deadline'
+          page.body.should match /Task one(.|\n)*Task two/
+        end
+
+        it 'should be able to sort them in descendant order' do
+          page.body.should match /Task two(.|\n)*Task one/
+        end
+      end
+    end
+
     def should_have_the_task_listed
       should have_content 'Buy milk'
       should have_content '21 December 2012'

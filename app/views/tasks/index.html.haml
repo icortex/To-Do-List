@@ -20,9 +20,9 @@
   %thead
     %tr
       %th= t(:mark_done)
-      %th= sort_link @q, :name, t(:task), {page: params[:page], f: params[:f]}
-      %th= sort_link @q, :deadline, t(:deadline), {page: params[:page], f: params[:f]}
-      %th= sort_link @q, :created_at, t(:created_at), {page: params[:page], f: params[:f]}
+      %th= sort_link @q, :name, t(:task), {page: params[:page], f: params[:f]}, {id: 'sort_name'}
+      %th= sort_link @q, :deadline, t(:deadline), {page: params[:page], f: params[:f]}, {id: 'sort_deadline'}
+      %th= sort_link @q, :created_at, t(:created_at), {page: params[:page], f: params[:f]}, {id: 'sort_created_at'}
       %th= t(:action)
   %tbody
     - @tasks.each do |task|
