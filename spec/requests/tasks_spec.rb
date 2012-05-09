@@ -249,6 +249,71 @@ describe "Tasks" do
       end
     end
 
+    context "filtering tasks by deadline", :focus do
+
+      before(:all) do
+        @today_tasks = []
+        @week_tasks = []
+        @month_tasks = []
+
+        @today_tasks << create(:task, name: 'Today 1', deadline: Date.today)
+        @today_tasks << create(:task, name: 'Today 2', deadline: Date.today)
+        @week_tasks << create(:task, name: 'Week 1', deadline: Date.today.end_of_week)
+        @week_tasks << create(:task, name: 'Week 2', deadline: Date.today.end_of_week)
+        @month_tasks << create(:task, name: 'Month 1', deadline: Date.today.end_of_month)
+        @month_tasks << create(:task, name: 'Month 2', deadline: Date.today.end_of_month)
+
+        @tasks = (@today_tasks + @week_tasks + @month_tasks).uniq # no duplicates please
+        @tasks << create(:task, name: 'Other task', deadline: (Date.today.end_of_month + 2.weeks)) #one extra far away from the range
+      end
+
+      before do
+        visit root_path
+      end
+
+      subject {page}
+
+      it 'should be able to see all' do
+        click_link t(:any)
+        @tasks.each do |task|
+          should have_content task.name
+        end
+      end
+
+      it 'should be able to see only those for today' do
+        click_link t(:today)
+        @today_tasks.each do |task|
+          should have_content task.name
+        end
+
+        (@tasks - @today_tasks).each do |task|
+          should_not have_content task.name
+        end
+      end
+
+      it 'should be able to see only those for the current week' do
+        click_link t(:week)
+        @week_tasks.each do |task|
+          should have_content task.name
+        end
+
+        (@tasks - @week_tasks - @today_tasks).each do |task|
+          should_not have_content task.name
+        end
+      end
+
+      it 'should be able to see only those for the current month' do
+        click_link t(:month)
+        @month_tasks.each do |task|
+          should have_content task.name
+        end
+
+        (@tasks - @month_tasks - @week_tasks - @today_tasks).each do |task|
+          should_not have_content task.name
+        end
+      end
+    end
+
     def should_have_the_task_listed
       should have_content 'Buy milk'
       should have_content '21 December 2012'
