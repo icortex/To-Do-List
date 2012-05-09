@@ -214,7 +214,7 @@ describe "Tasks" do
 
     end
 
-    describe "should be able to tasks search by name" do
+    describe "should be able to search tasks by name" do
       before(:all) do
         tasks = []
         tasks << create(:task, name: 'Use webkit')
