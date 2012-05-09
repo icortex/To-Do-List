@@ -38,3 +38,7 @@ group :development do
   gem 'wirb', '~> 0.4.1'
   gem "haml-rails", ">= 0.3.4"
 end
+
+group :production do
+  gem 'mysql2'
+end
