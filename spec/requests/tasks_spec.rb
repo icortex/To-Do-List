@@ -249,7 +249,7 @@ describe "Tasks" do
       end
     end
 
-    context "filtering tasks by deadline", :focus do
+    context "filtering tasks by deadline" do
 
       before(:all) do
         @today_tasks = []
