@@ -30,6 +30,7 @@ gem 'bootstrap-will_paginate', '~> 0.0.7'
 gem "therubyracer", :group => :assets, :platform => :ruby
 gem 'simple_form'
 gem "ransack"
+gem 'faker'
 
 group :development do
   gem 'nifty-generators', '~> 0.4.6'

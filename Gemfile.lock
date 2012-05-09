@@ -64,6 +64,8 @@ GEM
     factory_girl_rails (3.2.0)
       factory_girl (~> 3.2.0)
       railties (>= 3.0.0)
+    faker (1.0.1)
+      i18n (~> 0.4)
     ffi (1.0.11)
     haml (3.1.4)
     haml-rails (0.3.4)
@@ -193,6 +195,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   database_cleaner
   factory_girl_rails
+  faker
   haml (>= 3.1.4)
   haml-rails (>= 0.3.4)
   hirb (~> 0.6.0)

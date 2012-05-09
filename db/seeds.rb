@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+puts "  Creating tasks..."
+
+25.times do
+  FactoryGirl.create(:random_task)
+end
+
+puts '   ...Done'

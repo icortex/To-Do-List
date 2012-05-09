@@ -142,7 +142,7 @@ describe "Tasks" do
 
     end
 
-    describe "should be able to see paginated results on all lists (10 per page)", :clean_db do
+    describe "should be able to see paginated results on all lists (8 per page)", :clean_db do
 
       subject {page}
       it "in the all list" do
@@ -188,28 +188,28 @@ describe "Tasks" do
       end
 
       def should_show_page_one
-        10.times do |i|
+        8.times do |i|
           should have_content "Page 1 Task #{i}"
         end
 
         2.times do |i|
-          should_not have_content "Page 2 Task #{10+i}"
+          should_not have_content "Page 2 Task #{8+i}"
         end
       end
 
       def should_show_page_two
-        10.times do |i|
+        8.times do |i|
           should_not have_content "Page 1 Task #{i}"
         end
         2.times do |i|
-          should have_content "Page 2 Task #{10+i}"
+          should have_content "Page 2 Task #{8+i}"
         end
       end
 
       # Type, expired_task, done_task, pending_task
       def create_tasks_for_two_pages(type = :task)
-        10.times{ |i| create(type, name: "Page 1 Task #{i}") }
-        2.times{ |i| create(type, name: "Page 2 Task #{10+i}") }
+        8.times{ |i| create(type, name: "Page 1 Task #{i}") }
+        2.times{ |i| create(type, name: "Page 2 Task #{8+i}") }
       end
 
     end
