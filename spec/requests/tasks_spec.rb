@@ -12,10 +12,10 @@ describe "Tasks" do
       end
 
       subject {page}
+
       it 'should see the created task in the main list' do
         should have_content 'Buy milk'
       end
-
     end
 
     describe "should be able to create a task with a deadline so that he/she does not miss deadline", :clean_db do
@@ -32,11 +32,9 @@ describe "Tasks" do
       it 'should see the created task with deadline in the main list' do
         should_have_the_task_listed
       end
-
     end
 
     describe "should be able to edit a task so that he/she can change a task after it has been created", :clean_db do
-
       let!(:task){create(:task, deadline: Date.tomorrow)}
 
       before do
@@ -52,11 +50,9 @@ describe "Tasks" do
       it 'should see the edited task in the main list' do
         should_have_the_task_listed
       end
-
     end
 
     describe "should be able to mark a task as done so that he/she can distinguish incomplete tasks from complete ones", :clean_db do
-
       let!(:task){create(:task)}
 
       before do
@@ -64,26 +60,25 @@ describe "Tasks" do
       end
 
       subject {page}
-      it "should have the done mark checked in the main list and be accordingly updated" do
-        pending "HOW TO CHECK BUT HAVE JS TRIGGERED?"
-        check 'done'
-        should_have_the_task_listed
-        task.reload.should be_done
+
+      it "should not be in the pending list" do
+        task.mark_as_done
+        click_link t(:pending)
+        should_not_have_the_task_listed
       end
 
       it "should be in the done list" do
         task.mark_as_done
-        click_link 'Done'
+        click_link (:done)
         should_have_the_task_listed
       end
-
     end
 
     describe "should be able to see all tasks which didn't meet deadline as of today", :clean_db do
-
       let!(:task){create(:expired_task)}
 
       subject {page}
+
       it "should be in the expired list" do
         visit expired_tasks_path
         should_have_the_expired_task_listed
@@ -103,15 +98,12 @@ describe "Tasks" do
         visit done_tasks_path
         should_not_have_the_expired_task_listed
       end
-
     end
 
     describe "should be able to delete a task so that he/she can remove a task which is not a task anymore", :clean_db do
-
       subject {page}
 
       describe 'deleted task should not be in any list' do
-
         it "should not be in the all list" do
           create(:task)
           visit root_path
@@ -137,16 +129,13 @@ describe "Tasks" do
           should_not_have_the_task_listed
           Task.count.should be_zero
         end
-
       end
-
     end
 
     describe "should be able to see paginated results on all lists (8 per page)", :clean_db do
-
       subject {page}
-      it "in the all list" do
 
+      it "in the all list" do
         create_tasks_for_two_pages
 
         visit tasks_path
@@ -154,7 +143,6 @@ describe "Tasks" do
 
         click_link 'Next'
         should_show_page_two
-
       end
 
       it "in the expired list" do
@@ -211,7 +199,6 @@ describe "Tasks" do
         8.times{ |i| create(type, name: "Page 1 Task #{i}") }
         2.times{ |i| create(type, name: "Page 2 Task #{8+i}") }
       end
-
     end
 
     describe "should be able to search tasks by name" do
@@ -250,7 +237,6 @@ describe "Tasks" do
     end
 
     context "filtering tasks by deadline" do
-
       before(:all) do
         @today_tasks = []
         @week_tasks = []
@@ -333,7 +319,5 @@ describe "Tasks" do
       should_not have_content 'Buy milk'
       should_not have_content '21 December 2012'
     end
-
   end
-
 end
