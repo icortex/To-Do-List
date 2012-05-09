@@ -16,7 +16,6 @@ group :development, :test do
   gem 'spork-rails'
   gem 'shoulda-matchers'
   gem 'awesome_print'
-  gem 'factory_girl_rails'
   gem 'sqlite3'
 end
 
@@ -31,6 +30,7 @@ gem "therubyracer", :group => :assets, :platform => :ruby
 gem 'simple_form'
 gem "ransack"
 gem 'faker'
+gem 'factory_girl_rails'
 
 group :development do
   gem 'nifty-generators', '~> 0.4.6'
