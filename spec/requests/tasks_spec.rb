@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe "Tasks" do
+describe "Tasks", :clean_db do
 
   describe "A User" do
-    describe "should be able to create a task so that he/she does not forget something to do", :clean_db do
-      before(:all) do
+    describe "should be able to create a task so that he/she does not forget something to do" do
+      before do
         visit root_path
         click_link t(:new_task)
         fill_in 'task_name', with: 'Buy milk'
@@ -18,7 +18,7 @@ describe "Tasks" do
       end
     end
 
-    describe "should be able to create a task with a deadline so that he/she does not miss deadline", :clean_db do
+    describe "should be able to create a task with a deadline so that he/she does not miss deadline" do
       before do
         visit root_path
         click_link t(:new_task)
@@ -34,7 +34,7 @@ describe "Tasks" do
       end
     end
 
-    describe "should be able to edit a task so that he/she can change a task after it has been created", :clean_db do
+    describe "should be able to edit a task so that he/she can change a task after it has been created" do
       let!(:task){create(:task, deadline: Date.tomorrow)}
 
       before do
@@ -52,7 +52,7 @@ describe "Tasks" do
       end
     end
 
-    describe "should be able to mark a task as done so that he/she can distinguish incomplete tasks from complete ones", :clean_db do
+    describe "should be able to mark a task as done so that he/she can distinguish incomplete tasks from complete ones" do
       let!(:task){create(:task)}
 
       before do
@@ -80,7 +80,7 @@ describe "Tasks" do
       end
     end
 
-    describe "should be able to see all tasks which didn't meet deadline as of today", :clean_db do
+    describe "should be able to see all tasks which didn't meet deadline as of today" do
       let!(:task){create(:expired_task)}
 
       subject {page}
@@ -106,7 +106,7 @@ describe "Tasks" do
       end
     end
 
-    describe "should be able to delete a task so that he/she can remove a task which is not a task anymore", :clean_db do
+    describe "should be able to delete a task so that he/she can remove a task which is not a task anymore" do
       subject {page}
 
       describe 'deleted task should not be in any list' do
@@ -138,7 +138,7 @@ describe "Tasks" do
       end
     end
 
-    describe "should be able to see paginated results on all lists (8 per page)", :clean_db do
+    describe "should be able to see paginated results on all lists (8 per page)" do
       subject {page}
 
       it "in the all list" do
@@ -208,7 +208,7 @@ describe "Tasks" do
     end
 
     describe "should be able to search tasks by name" do
-      before(:all) do
+      before do
         tasks = []
         tasks << create(:task, name: 'Use webkit')
         tasks << create(:task, name: 'Keep dOg')
@@ -245,7 +245,7 @@ describe "Tasks" do
     end
 
     context "filtering tasks by deadline" do
-      before(:all) do
+      before do
         @today_tasks = []
         @week_tasks = []
         @month_tasks = []
@@ -259,9 +259,7 @@ describe "Tasks" do
 
         @tasks = (@today_tasks + @week_tasks + @month_tasks).uniq # no duplicates please
         @tasks << create(:task, name: 'Other task', deadline: (Date.today.end_of_month + 2.weeks)) #one extra far away from the range
-      end
 
-      before do
         visit root_path
       end
 
@@ -309,29 +307,13 @@ describe "Tasks" do
     end
 
     context "ordering tasks" do
-      before(:all) do
-        @today_tasks = []
-        @week_tasks = []
-        @month_tasks = []
-
-        @today_tasks << create(:task, name: 'Today 1', deadline: Date.today)
-        @today_tasks << create(:task, name: 'Today 2', deadline: Date.today)
-        @week_tasks << create(:task, name: 'Week 1', deadline: Date.today.end_of_week)
-        @week_tasks << create(:task, name: 'Week 2', deadline: Date.today.end_of_week)
-        @month_tasks << create(:task, name: 'Month 1', deadline: Date.today.end_of_month)
-        @month_tasks << create(:task, name: 'Month 2', deadline: Date.today.end_of_month)
-
-        @tasks = (@today_tasks + @week_tasks + @month_tasks).uniq # no duplicates please
-        @tasks << create(:task, name: 'Other task', deadline: (Date.today.end_of_month + 2.weeks)) #one extra far away from the range
-      end
-
       before do
         visit root_path
       end
 
       subject {page}
 
-      context "by created at", :clean_db do
+      context "by created at" do
         before do
           create(:task, name: 'Task two').update_attribute(:created_at, Time.now - 1.hour)
           create(:task, name: 'Task one').update_attribute(:created_at, Time.now - 2.hours)
@@ -349,7 +331,7 @@ describe "Tasks" do
         end
       end
 
-      context "by deadline", :clean_db do
+      context "by deadline" do
         before do
           create(:task, name: 'Task one', deadline: Date.today)
           create(:task, name: 'Task two', deadline: Date.tomorrow)

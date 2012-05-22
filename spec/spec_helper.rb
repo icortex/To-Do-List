@@ -42,23 +42,21 @@ Spork.prefork do
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
     # examples within a transaction, remove the following line or assign false
     # instead of true.
-    config.use_transactional_fixtures = false # IMPORTANT when using Capybara js driver
+    config.use_transactional_fixtures = false # IMPORTANT when using Capybara js driver assign false
 
     config.treat_symbols_as_metadata_keys_with_true_values = true
     config.filter_run :focus => true
     config.run_all_when_everything_filtered = true
 
     config.before(:suite) do
+      DatabaseCleaner.strategy = :truncation
       DatabaseCleaner.start
+      DatabaseCleaner.clean
     end
 
     # Clean db in before hook, best if stopped examples at the middle of execution
     config.before(:each, :clean_db => true) do |example|
-      if Capybara.current_driver == :rack_test
-        DatabaseCleaner.strategy = :transaction
-      else
-        DatabaseCleaner.strategy = :truncation
-      end
+      DatabaseCleaner.start
       DatabaseCleaner.clean
     end
 
@@ -69,10 +67,6 @@ Spork.prefork do
 
     config.after(:suite) do
     end
-
-    #config.before(:each, :type => :request) do
-    #  Capybara.reset_sessions!
-    #end
 
     # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
     #config.fixture_path = "#{::Rails.root}/spec/fixtures"
