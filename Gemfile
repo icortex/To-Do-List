@@ -43,3 +43,5 @@ end
 group :production do
   gem 'pg'
 end
+
+gem 'cover_me', '>= 1.2.0', :group => :test
