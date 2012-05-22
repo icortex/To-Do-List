@@ -61,6 +61,12 @@ describe "Tasks" do
 
       subject {page}
 
+      it "should be able to mark a task as done from the main list", :js do
+        check "checkbox_#{task.id}"
+        sleep 1
+        task.reload.should be_done
+      end
+
       it "should not be in the pending list" do
         task.mark_as_done
         click_link t(:pending)
@@ -69,7 +75,7 @@ describe "Tasks" do
 
       it "should be in the done list" do
         task.mark_as_done
-        click_link (:done)
+        click_link t(:done)
         should_have_the_task_listed
       end
     end
@@ -222,6 +228,7 @@ describe "Tasks" do
         should have_content 'Adopt kittens'
         should have_content 'Use webkit'
         should_not have_content 'Feed dog'
+        should_not have_content 'Keep dOg'
         should_not have_content 'Call kid'
       end
 
@@ -233,6 +240,7 @@ describe "Tasks" do
 
         should_not have_content 'Adopt kittens'
         should_not have_content 'Use webkit'
+        should_not have_content 'Call kid'
       end
     end
 
