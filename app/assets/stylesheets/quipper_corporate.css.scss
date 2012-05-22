@@ -116,10 +116,36 @@ body {
   #search-btn {
     margin-top: 8px;
   }
+
+  header.container{
+    a{
+      padding-left: 7px;
+      /*padding-left: 20px; CENTERED*/
+    }
+  }
+
   .navbar ul.primary_nav {
     width: 100%;
     @include ul-border-radius(0);
     margin-top: 0;
+  }
+
+  .table{
+    font-size: 0.85em;
+  }
+
+  .navbar-inner {
+    padding-left: 0px;
+  }
+
+  .nav-collapse{
+    padding-left: 20px;
+  }
+
+  .btn-navbar-wrapper{
+    a.btn.btn-navbar{
+      float: left;
+    }
   }
   .navbar ul.primary_nav li {
     display: block;
