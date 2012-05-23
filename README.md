@@ -15,8 +15,8 @@ Test application for [JoinQuipper](https://github.com/quipper/JoinQuipper).
 ### Implemented user stories
 
 * As a user, I want to create a task so that I will not forget something to do.
-* As a user, I want to create a task with a deadline so that I will not miss deadline.
-* As a user, I want to edit a task so that I can change a task after I created
+* As a user, I want to create a task with a deadline so that I will not miss the deadline.
+* As a user, I want to edit a task so that I can change a task after I created it.
 * As a user, I want to mark a task as done so that I can distinguish incomplete tasks from complete ones.
 * As a user, I want to see all tasks which didn't meet deadline as of today.
 * As a user, I want to delete a task so that I can remove task which is not a task any more.

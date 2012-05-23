@@ -45,3 +45,4 @@ group :production do
 end
 
 gem 'cover_me', '>= 1.2.0', :group => :test
+gem 'yard'

@@ -1,6 +1,6 @@
 $ ->
   $('.datepicker').datepicker
-    format: 'yyyy-mm-dd'
+    format: 'yyyy/mm/dd'
 
   $("#new_task_container").on "shown", ->
     $('#new-task-link').fadeOut(250)
