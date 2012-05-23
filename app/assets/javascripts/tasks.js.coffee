@@ -21,7 +21,3 @@ sendDoneStatus = (status_url, status) ->
     type: "PUT"
     url: status_url
     data: {task: {done: status}}
-    success: (redirect_url) ->
-      window.location.href = redirect_url
-    error: (redirect_url) ->
-      window.location.href = redirect_url

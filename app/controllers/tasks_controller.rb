@@ -27,15 +27,16 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-
-    if @task.update_attributes(params[:task])
-      if request.xhr?
-        render text: request.referer
+    respond_to do |format|
+      if @task.update_attributes(params[:task])
+        if request.xhr?
+          format.js
+        else
+          format.html { redirect_to session[:return_to], notice: t(:task_updated) }
+        end
       else
-        redirect_to session[:return_to], notice: t(:task_updated)
+        format.html { render action: "edit" }
       end
-    else
-      render action: "edit"
     end
   end
 
