@@ -258,7 +258,7 @@ describe "Tasks", :clean_db do
         @month_tasks << create(:task, name: 'Month 2', deadline: Date.today.end_of_month)
 
         @tasks = (@today_tasks + @week_tasks + @month_tasks).uniq # no duplicates please
-        @tasks << create(:task, name: 'Other task', deadline: (Date.today.end_of_month + 2.weeks)) #one extra far away from the range
+        @tasks << create(:task, name: 'Other task', deadline: (Date.today.end_of_month + 2.weeks)) #one extra task far away from the range
 
         visit root_path
       end
