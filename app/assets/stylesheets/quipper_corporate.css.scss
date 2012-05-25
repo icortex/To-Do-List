@@ -124,6 +124,10 @@ body {
     }
   }
 
+  .hidden-phone2{
+    display: none;
+  }
+
   .navbar ul.primary_nav {
     width: 100%;
     @include ul-border-radius(0);
