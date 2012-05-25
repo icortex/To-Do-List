@@ -13,7 +13,7 @@
     = link_to t(:week), date_filter_path(:week), class: "btn #{is_active_date?(:week)}"
     = link_to t(:month), date_filter_path(:month), class: "btn #{is_active_date?(:month)}"
     = link_to t(:any), date_filter_path(:any), class: "btn #{is_active_any_date?}"
-  = search_form_for @q, html: {class: 'form-search'} do |f|
+  = search_form_for @search, html: {class: 'form-search'} do |f|
     = f.text_field :name_cont, class: '.input-medium search-query'
     = f.submit t(:search), class: 'btn', id: 'search-btn'
 %table.table
@@ -21,9 +21,9 @@
     %tr
       %th.visible-phone
       %th= t(:mark_done)
-      %th= sort_link @q, :name, t(:task), {page: params[:page], f: params[:f]}, {id: 'sort_name'}
-      %th= sort_link @q, :deadline, t(:deadline), {page: params[:page], f: params[:f]}, {id: 'sort_deadline'}
-      %th.hidden-phone2= sort_link @q, :created_at, t(:created_at), {page: params[:page], f: params[:f]}, {id: 'sort_created_at'}
+      %th= sort_link @search, :name, t(:task), {page: params[:page], f: params[:f]}, {id: 'sort_name'}
+      %th= sort_link @search, :deadline, t(:deadline), {page: params[:page], f: params[:f]}, {id: 'sort_deadline'}
+      %th.hidden-phone2= sort_link @search, :created_at, t(:created_at), {page: params[:page], f: params[:f]}, {id: 'sort_created_at'}
       %th.hidden-phone= t(:action)
       %th.visible-phone
   %tbody

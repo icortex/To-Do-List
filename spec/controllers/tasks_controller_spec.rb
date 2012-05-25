@@ -167,7 +167,7 @@ describe TasksController do
       end
 
       it 'should return a ransack search object' do
-        assigns(:q).should be_a Ransack::Search
+        assigns(:search).should be_a Ransack::Search
       end
 
       it "should modify parameters to include query parameter 'q'" do

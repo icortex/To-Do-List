@@ -86,7 +86,7 @@ class TasksController < ApplicationController
   # Searches tasks by name, and the result is paginated and sorted by deadline
   def apply_filters
     params[:q] = params[:q] ? params[:q].reverse_merge({ s: 'deadline asc' }) : { s: 'deadline asc' }
-    @q = Task.search(params[:q])
-    @tasks = @q.result.paginate(:page => params[:page], :per_page => 8)
+    @search = Task.search(params[:q])
+    @tasks = @search.result.paginate(:page => params[:page], :per_page => 8)
   end
 end
