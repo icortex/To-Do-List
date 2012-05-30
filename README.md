@@ -10,7 +10,7 @@ Test application for [JoinQuipper](https://github.com/quipper/JoinQuipper).
 * Search with Ransack
 * Twitter bootstrap
 * HAML and SASS
-* Deployed in [Heroku](http://summertest.herokuapp.com/)
+* Deployed in [Heroku](http://smooth-wind-2537.herokuapp.com/)
 
 ### Implemented user stories
 
